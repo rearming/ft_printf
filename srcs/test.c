@@ -12,8 +12,8 @@
 
 #include <stdio.h>
 
-int 	main(void)
-{
-	printf("% #0*.*f|\n", 7, 1, 666.324525425);
-	return (0);
-}
+//int 	main(void)
+//{
+//	printf("% #0*.*f|\n", 7, 1, 666.324525425);
+//	return (0);
+//}

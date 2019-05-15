@@ -70,8 +70,8 @@ int 	ft_printf(const char *format, ...)
 	//return (print_result());
 }
 
-int		main(void)
-{
-	//ft_printf("%i\n", 10);
-	return (0);
-}
+//int		main(void)
+//{
+//	//ft_printf("%i\n", 10);
+//	return (0);
+//}

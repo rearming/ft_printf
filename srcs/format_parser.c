@@ -47,7 +47,7 @@ int 		get_width(char *part, int *i)
 	if (!ft_isdigit(part[*i]))
 		return (0);
 	res = ft_atoi(&part[*i]);
-	*i = count_digits(res); //todo check later
+	*i = ft_count_digits(res); //todo check later
 	return (res);
 }
 
