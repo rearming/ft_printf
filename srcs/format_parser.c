@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+t_printf	g_printf;
+
 t_flags		get_flags(char *part, int *i)
 {
 	t_flags		flags;
@@ -47,7 +49,7 @@ int 		get_width(char *part, int *i)
 	if (!ft_isdigit(part[*i]))
 		return (0);
 	res = ft_atoi(&part[*i]);
-	*i = ft_count_digits(res); //todo check later
+	*i = ft_count_digits(res);
 	return (res);
 }
 
@@ -61,17 +63,21 @@ int 		get_accuracy(char *part, int *i)
 	if (part[*i] == '*')
 		return (va_arg(g_printf.ap, int));
 	res = ft_atoi(&part[*i]);
-	*i = count_digits(res);
+	*i = ft_count_digits(res);
 	return (res);
+}
+
+int 		get_type_mod(char *part, int *i)
+{
+
 }
 
 int 		get_type(char *part, int *i)
 {
 	while (!ft_isalpha(part[*i]))
 		(*i)++;
-	
-	if (part[*i] == 'c')
 
+	//if (part[*i] == 'c')
 }
 
 t_format	get_format(char *part)
@@ -83,5 +89,6 @@ t_format	get_format(char *part)
 	format.flags = get_flags(part, &i);
 	format.width = get_width(part, &i);
 	format.accuracy = get_accuracy(part, &i);
-	format.type =
+	format.type = get_type(part, &i);
+	return (format);
 }

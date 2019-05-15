@@ -12,9 +12,11 @@
 
 #include "ft_printf.h"
 
+t_printf	g_printf;
+
 void		add_text(char *part)
 {
-	ft_lstadd_b(&g_printf.lst_buf, part, ft_strlen(part));
+	ft_lstaddback(&g_printf.lst_buf, part, ft_strlen(part));
 	free(part);
 }
 

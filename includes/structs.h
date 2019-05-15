@@ -13,21 +13,23 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct			s_arg
+# include "ft_printf.h"
+
+typedef struct			s_type
 {
-	char 				a_char;
-	unsigned char		a_uchar;
-	short 				a_short;
-	unsigned short		a_ushort;
-	int 				a_int;
-	unsigned int		a_uint;
-	long				a_long;
-	unsigned long 		a_ulong;
-	float 				a_float;
-	double				a_double;
-	long double			a_l_double;
+	char 				tp_char;
+	unsigned char		tp_uchar;
+	short 				tp_short;
+	unsigned short		tp_ushort;
+	int 				tp_int;
+	unsigned int		tp_uint;
+	long				tp_long;
+	unsigned long 		tp_ulong;
+	float 				tp_float;
+	double				tp_double;
+	long double			tp_l_double;
 	char 				*string;
-}						t_arg;
+}						t_type;
 
 typedef struct			s_flags
 {
@@ -49,8 +51,7 @@ typedef struct			s_format
 typedef struct	s_printf
 {
 	t_list				*lst_buf;
-	int 				end_i;
-	__darwin_va_list	ap;
+	va_list 			ap;
 }				t_printf;
 
 #endif
