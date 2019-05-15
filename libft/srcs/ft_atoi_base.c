@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:19:09 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/10 21:14:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:39:53 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ long		ft_atoi_base(char *str, int base)
 	i = skip_obs(str, &is_neg);
 	if (base > 16 || base < 2)
 		return (0);
-	digits = count_digits_base(&str[i], base) - 1;
+	digits = ft_count_digits_base(&str[i], base) - 1;
 	while (ft_isdigit(str[i]) || (str[i] >= 'A' && str[i] <= 'A' + base - 11))
 	{
 		if (ft_isdigit(str[i]) && str[i] > '0' + base)

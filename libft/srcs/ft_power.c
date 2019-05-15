@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_digits_base.c                                :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/05 19:21:01 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/10 21:14:00 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/15 11:40:26 by sselusa           #+#    #+#             */
+/*   Updated: 2019/05/15 11:40:29 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		count_digits_base(char *str, int base)
+long		ft_power(long nbr, int power)
 {
-	int		i;
-	char	test;
+	long	base_nbr;
 
-	i = 0;
-	while (str[i])
+	base_nbr = nbr;
+	if (power < 0)
+		return (0);
+	if (power == 0)
+		return (1);
+	while (power > 1)
 	{
-		test = ft_toupper(str[i]);
-		if ((ft_isdigit(test) && test <= '0' + base)
-			|| (test >= 'A' && test <= 'A' + base - 11))
-			i++;
-		else
-			break ;
+		nbr *= base_nbr;
+		power--;
 	}
-	return (i);
+	return (nbr);
 }

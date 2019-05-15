@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:47 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/15 11:40:57 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,5 +367,25 @@ t_list				*ft_lstmap(t_list *alst, t_list *(*f)(t_list *elem));
 **	returns -1 on error, 1 on success and 0 on EOF.
 */
 int					get_next_line(const int fd, char **line);
+
+/*
+**	Same as atoi (str) but returns number in (base).
+*/
+long				ft_atoi_base(char *str, int base);
+
+/*
+**	Returns count of digits in (nb).
+*/
+int					ft_count_digits(int nb);
+
+/*
+**	Returns count of digits in (nb) with (base).
+*/
+int					ft_count_digits_base(char *str, int base);
+
+/*
+**	Returns (nbr) in (power).
+*/
+long				ft_power(long nbr, int power);
 
 #endif

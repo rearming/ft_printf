@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_digits.c                                     :+:      :+:    :+:   */
+/*   ft_count_digits.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 14:54:24 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/10 21:14:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/15 11:35:00 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		count_digits(int nb)
+int		ft_count_digits(int nb)
 {
 	int		symb_n;
 
