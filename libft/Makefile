@@ -32,7 +32,9 @@ SRCS = ./srcs/ft_atoi.c ./srcs/ft_bzero.c ./srcs/ft_isalnum.c \
 	./srcs/ft_putendl_fd.c ./srcs/ft_putnbr_fd.c \
 	./srcs/ft_lstnew.c ./srcs/ft_lstdelone.c ./srcs/ft_lstdel.c \
 	./srcs/ft_lstadd.c ./srcs/ft_lstiter.c ./srcs/ft_lstmap.c \
-	./srcs/get_next_line.c ./srcs/ft_lstaddback.c
+	./srcs/get_next_line.c ./srcs/ft_lstaddback.c ./srcs/ft_power.c \
+	./srcs/ft_count_digits.c ./srcs/ft_count_digits_base.c \
+	./srcs/ft_atoi_base.c
 INCL = ./includes
 OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_isascii.o ./ft_isdigit.o ./ft_isprint.o ./ft_memccpy.o \
@@ -49,7 +51,9 @@ OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_putchar_fd.o ./ft_putstr_fd.o ./ft_putendl_fd.o \
 	./ft_putnbr_fd.o ./ft_lstnew.o ./ft_lstdelone.o ./ft_lstdel.o \
 	./ft_lstadd.o ./ft_lstiter.o ./ft_lstmap.o ./get_next_line.o \
-	./ft_lstaddback.o
+	./ft_lstaddback.o ./ft_power.o \
+	./ft_count_digits.o ./ft_count_digits_base.o \
+	./ft_atoi_base.o
 
 .PHONY: all clean fclean re
 
