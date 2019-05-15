@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#ifndef FT_TYPES_H
+# define FT_TYPES_H
 
 # define CHAR 10
 # define UCHAR 11

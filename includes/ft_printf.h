@@ -13,14 +13,14 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
-# include "structs.h"
-# include "types.h"
-
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
+
+# include "libft.h"
+# include "structs.h"
+# include "ft_types.h"
 
 extern t_printf	g_printf;
 

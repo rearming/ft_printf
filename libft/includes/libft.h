@@ -391,6 +391,6 @@ long				ft_power(long nbr, int power);
 /*
 **	Adds node with (content) and (content_size) to the end of (list).
 */
-void	ft_lstaddback(t_list **list, void *content, size_t content_size);
+void				ft_lstaddback(t_list **list, void *content, size_t content_size);
 
 #endif

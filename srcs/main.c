@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+t_printf	g_printf;
+
 /*char 	*parse_arg()
 {
 	//ft_lstadd_b(, parse_arg(), );
@@ -46,10 +48,10 @@ void	add_buf_node(char *part)
 		add_uint(part, format);
 }
 
-/*int		print_result(void)
+int		print_result(void)
 {
 
-}*/
+}
 
 int 	ft_printf(const char *format, ...)
 {
@@ -70,8 +72,8 @@ int 	ft_printf(const char *format, ...)
 	//return (print_result());
 }
 
-//int		main(void)
-//{
-//	//ft_printf("%i\n", 10);
-//	return (0);
-//}
+int		main(void)
+{
+	//ft_printf("%i\n", 10);
+	return (0);
+}
