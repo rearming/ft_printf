@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/15 11:40:57 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/15 11:57:51 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,5 +387,10 @@ int					ft_count_digits_base(char *str, int base);
 **	Returns (nbr) in (power).
 */
 long				ft_power(long nbr, int power);
+
+/*
+**	Adds node with (content) and (content_size) to the end of (list).
+*/
+void	ft_lstaddback(t_list **list, void *content, size_t content_size);
 
 #endif

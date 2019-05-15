@@ -6,12 +6,12 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/13 20:11:30 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/13 20:17:57 by sselusa          ###   ########.fr        #
+#    Updated: 2019/05/15 12:01:04 by sselusa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-FLGS = -Wall -Wextra -Werror -O2
+FLGS = -Wall -Wextra -Werror -O3
 SRCS = $(wildcard srcs/*.c)
 INCL = ./includes
 LBFT = -lft
@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LFTD)
-	@gcc $(FLGS) -c $(SRCS) -I $(INCL) -I $(LFTD)/includes -L$(LFTD) $(LBFT)
+	@gcc -c $(FLGS) $(SRCS) -I $(INCL) -I $(LFTD)/includes
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 

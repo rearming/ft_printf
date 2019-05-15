@@ -6,7 +6,7 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/30 15:49:46 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/13 20:12:01 by sselusa          ###   ########.fr        #
+#    Updated: 2019/05/15 11:58:31 by sselusa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS = ./srcs/ft_atoi.c ./srcs/ft_bzero.c ./srcs/ft_isalnum.c \
 	./srcs/ft_putendl_fd.c ./srcs/ft_putnbr_fd.c \
 	./srcs/ft_lstnew.c ./srcs/ft_lstdelone.c ./srcs/ft_lstdel.c \
 	./srcs/ft_lstadd.c ./srcs/ft_lstiter.c ./srcs/ft_lstmap.c \
-	./srcs/get_next_line.c
+	./srcs/get_next_line.c ./srcs/ft_lstaddback.c
 INCL = ./includes
 OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_isascii.o ./ft_isdigit.o ./ft_isprint.o ./ft_memccpy.o \
@@ -48,7 +48,8 @@ OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_putchar.o ./ft_putstr.o ./ft_putendl.o ./ft_putnbr.o \
 	./ft_putchar_fd.o ./ft_putstr_fd.o ./ft_putendl_fd.o \
 	./ft_putnbr_fd.o ./ft_lstnew.o ./ft_lstdelone.o ./ft_lstdel.o \
-	./ft_lstadd.o ./ft_lstiter.o ./ft_lstmap.o ./get_next_line.o
+	./ft_lstadd.o ./ft_lstiter.o ./ft_lstmap.o ./get_next_line.o \
+	./ft_lstaddback.o
 
 .PHONY: all clean fclean re
 
