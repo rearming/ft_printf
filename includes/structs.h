@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 11:28:25 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/14 18:06:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/16 15:52:41 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ typedef struct			s_format
 {
 	t_flags				flags;
 	int 				width;
-	int 				accuracy;
+	int 				precision;
+	int 				type_flag;
 	int 				type;
+	int 				i;
 }						t_format;
 
-typedef struct	s_printf
+typedef struct			s_printf
 {
 	t_list				*lst_buf;
 	va_list 			ap;
-}				t_printf;
+}						t_printf;
 
 #endif

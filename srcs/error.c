@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 20:27:04 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:10 by sselusa          ###   ########.fr       */
+/*   Created: 2019/05/16 13:22:37 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/16 13:22:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int						ft_printf_fd(const char *format, int fd, ...)
+void		raise_error(int err_code)
 {
-	return (0);
+	exit(err_code);
 }

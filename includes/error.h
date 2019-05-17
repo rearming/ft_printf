@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 20:27:04 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:10 by sselusa          ###   ########.fr       */
+/*   Created: 2019/05/16 13:22:57 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/16 17:19:57 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int						ft_printf_fd(const char *format, int fd, ...)
-{
-	return (0);
-}
+# define ERR_MALLOC 100
+# define ERR_NULL_STR 101
+# define ERR_ARG 102
+
+#endif
