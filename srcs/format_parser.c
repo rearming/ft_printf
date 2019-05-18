@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 17:25:27 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:02:37 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int			get_type_flag(char *part, int *i)
 		return (LDOUBLE);
 	if (part[*i] == 'c' || part[*i] == 's' || part[*i] == 'p'
 	|| part[*i] == 'd' || part[*i] == 'i' || part[*i] == 'o'
-	|| part[*i] == 'u' || part[*i] == 'x' || part[*i] == 'X')
+	|| part[*i] == 'u' || part[*i] == 'x' || part[*i] == 'X'
+	|| part[*i] == 'b')
 		return (NOT_SET);
 	else
 		return (BREAK);

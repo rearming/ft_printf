@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 18:37:30 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:17:41 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void		add_buf_node(char *part)
 		add_signed(part, format);
 	if (format.type == UNSIGNED)
 		add_unsigned(part, format);
+	if (format.type == B_HEX || format.type == S_HEX
+		|| format.type == PTR || format.type == OCTAL
+			|| format.type == BINARY)
+		add_base(part, format);
 }
 
 int 		ft_printf(const char *format, ...)
@@ -190,6 +194,52 @@ int			main(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("big prec: %10.5llu &&&$%%\n", 9889988888888888888llu);
 	printf("printf:    big prec: %10.5llu &&&$%%\n", 9889988888888888888llu);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tBig hex:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("long long HEX: %10llX &&&$%%\n", 922337203685477580ll);
+	printf("printf:    long long HEX: %10llX &&&$%%\n", 922337203685477580ll);
+
+	ft_putchar('\n');
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("mini HEX: %10llX &&&$%%\n", 98ll);
+	printf("printf:    mini HEX: %10llX &&&$%%\n", 98ll);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tSmall hex:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("just hex: %#10x &&&$%%\n", 1535);
+	printf("printf:    just hex: %#10x &&&$%%\n", 1535);
+
+	ft_putchar('\n');
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("just hex without grid: %10x &&&$%%\n", -9984);
+	printf("printf:    just hex without grid: %10x &&&$%%\n", -9984);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tOctal:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("robots: %#10llo &&&$%%\n", 666ll);
+	printf("printf:    robots: %#10llo &&&$%%\n", 666ll);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tPointer:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("robots: %p &&&$%%\n", &ft_printf);
+	printf("printf:    robots: %p &&&$%%\n", &ft_printf);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tBinary:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("robots: %#10b &&&$%%\n", 255);
 
 	return (0);
 }

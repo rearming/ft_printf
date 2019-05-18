@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 18:24:38 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 20:51:00 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,18 @@ void		fill_int_format(t_format format, char *arg)
 	len = format.precision > len ? format.precision : len;
 	differ = format.width > len ? format.width - len : 0;
 	if (format.flags.minus)
-		ft_lstaddback(&g_printf.lst_buf, temp, len);
+	{
+		if (format.flags.plus)
+			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
+	}
 	fill_differ(differ, format);
 	if (!format.flags.minus)
-		ft_lstaddback(&g_printf.lst_buf, temp, len);
+	{
+		if (format.flags.plus)
+			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
+	}
 	free(temp);
 }
 

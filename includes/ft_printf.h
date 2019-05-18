@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 17:00:15 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 20:39:35 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,14 @@ void		add_uchar(char *part, t_format format);
 char 		*convert_signed_arg(t_format format);
 void		add_signed(char *part, t_format format);
 void		add_unsigned(char *part, t_format format);
+void		add_base(char *part, t_format format);
 
 /*
 ** debug functions
 */
 
 void		print_format(t_format format);
+char 		*debug_type(int code);
 
 /*
 ** error functions
@@ -88,10 +90,12 @@ void		ft_u_putstr_fd(char *str, int fd);
 char		**split_flags(const char *str, char delim);
 
 /*
-** ft_lltoa
+** itoa and atoi's
 */
 
 char		*ft_lltoa(long long n);
 char		*ft_ulltoa(unsigned long long int n);
+char		*ft_lltoa_base(long long nbr, int base, char capital, char format);
+long long	ft_atoll(char *str);
 
 #endif

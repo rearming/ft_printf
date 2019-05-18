@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:49:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 15:51:41 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:15:10 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int 	main(void)
 	int 	i;
 
 	i = 0;
-	printf("%#10.4hhx\n", 255);
+	//printf("%#10.4hhx\n", 255);
+	printf("ptr: [%20-p]\n", &i);
+	printf("int ptr: [%+20o]\n", 255);
+	printf("hex: [%#lx]\n", &i);
 	return (0);
 }
 
@@ -39,7 +42,7 @@ int 	main(void)
 
 %c - char
 %s - string
-%p - pointer
+%p - pointer = %lx по сути
 
 %d - int
 %i - int
