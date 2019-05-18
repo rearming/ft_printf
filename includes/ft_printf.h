@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/16 18:04:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:53:41 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ t_format	get_format(char *part);
 ** formatting functions
 */
 
-void fill_format(t_format format, char *arg);
+void		fill_int_format(t_format format, char *arg);
+void		fill_format(t_format format, char *arg);
 
 /*
 ** string functions
@@ -54,13 +55,12 @@ void		add_char(char *part, t_format format);
 void		add_uchar(char *part, t_format format);
 
 /*
-** whole number functions
+** int functions
 */
 
-void		add_short(char *part, t_format format);
-void		add_ushort(char *part, t_format format);
-void		add_int(char *part, t_format format);
-void		add_uint(char *part, t_format format);
+char 		*convert_signed_arg(t_format format);
+void		add_signed(char *part, t_format format);
+void		add_unsigned(char *part, t_format format);
 
 /*
 ** debug functions
@@ -85,6 +85,12 @@ void		ft_u_putstr_fd(char *str, int fd);
 ** split flags function
 */
 
-char 	**split_flags(const char *str, char delim);
+char		**split_flags(const char *str, char delim);
+
+/*
+** ft_lltoa
+*/
+
+char		*ft_lltoa(long long n);
 
 #endif

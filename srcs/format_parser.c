@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 13:54:15 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 17:25:27 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			get_width(char *part, int *i)
 	return (res);
 }
 
-int			get_accuracy(char *part, int *i)
+int			get_precision(char *part, int *i)
 {
 	int		res;
 
@@ -62,6 +62,8 @@ int			get_accuracy(char *part, int *i)
 	if (part[*i] == '*')
 		return (va_arg(g_printf.ap, int));
 	res = ft_atoi(&part[*i]);
+	if (!ft_isdigit(part[*i]))
+		*i -= 1;
 	*i += ft_count_digits(res);
 	return (res);
 }
@@ -87,7 +89,7 @@ int			get_type_flag(char *part, int *i)
 	if (part[*i] == 'z')
 		return (SIZE_T);
 	if (part[*i] == 'L')
-		return (LONG_LONG);
+		return (LDOUBLE);
 	if (part[*i] == 'c' || part[*i] == 's' || part[*i] == 'p'
 	|| part[*i] == 'd' || part[*i] == 'i' || part[*i] == 'o'
 	|| part[*i] == 'u' || part[*i] == 'x' || part[*i] == 'X')
@@ -107,7 +109,7 @@ int			get_type(char *part, int *i)
 	if (part[*i] == 'd' || part[*i] == 'i')
 		return (INT);
 	if (part[*i] == 'u')
-		return (UINT);
+		return (UNSIGNED);
 	if (part[*i] == 'o')
 		return (OCTAL);
 	if (part[*i] == 'x')
@@ -139,7 +141,7 @@ t_format	get_format(char *part)
 		format.i++;
 	format.flags = get_flags(part, &format.i);
 	format.width = get_width(part, &format.i);
-	format.precision = get_accuracy(part, &format.i);
+	format.precision = get_precision(part, &format.i);
 	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
 		return (format);
 	if (format.type_flag != NOT_SET)

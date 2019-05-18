@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:49:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 13:35:26 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:51:41 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,7 @@ int 	main(void)
 	int 	i;
 
 	i = 0;
-	//res = ft_strsplit(str, '%');
-	/*res = split_flags(str, '%');
-	while (res[i])
-	{
-		printf("res: [%s]\n", res[i]);
-		i++;
-	}*/
-	//str2 = "jopa lel kek%%%% ynolikpro|";
-	printf("there are [%i] parts in [%s]\n", new_count(str2, '%'), str2);
-	res = split_flags(str2, '%');
-	while (res[i])
-	{
-		printf("res[%i]: [%s]\n", i, res[i]);
-		i++;
-	}
+	printf("%#10.4hhx\n", 255);
 	return (0);
 }
 

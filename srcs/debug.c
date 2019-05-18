@@ -30,8 +30,8 @@ char 		*debug_type(int code)
 			return ("USHORT");
 		case INT:
 			return ("INT");
-		case UINT:
-			return ("UINT");
+		case UNSIGNED:
+			return ("UNSIGNED");
 		case LONG:
 			return ("LONG");
 		case LONG_LONG:

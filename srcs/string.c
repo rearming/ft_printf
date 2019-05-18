@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:20:52 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 14:11:37 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:11:48 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,4 @@ void		add_char(char *part, t_format format)
 	free(res);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i], ft_strlen(&part[format.i]) + 1);
 	free(part);
-}
-
-void		add_uchar(char *part, t_format format)
-{
-	/*char	*res;
-	char 	arg;
-
-	res = ft_strnew(1);
-	arg = va_arg(g_printf.ap, int);
-	res[0] = (unsigned char)arg;
-	fill_format(format, res);
-	free(res);
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i], ft_strlen(part) + 1);
-	free(part);*/
 }

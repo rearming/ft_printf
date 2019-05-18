@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-FLGS = -Wall -Wextra -Werror -O3
+FLGS = -Wall -Wextra -O2
 SRCS = $(wildcard srcs/*.c)
 INCL = ./includes
 LBFT = -lft

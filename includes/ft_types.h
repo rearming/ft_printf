@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:07:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/14 17:32:51 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:02:25 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define SHORT 12
 # define USHORT 13
 # define INT 14
-# define UINT 15
+# define UNSIGNED 15
 # define LONG 16
 # define LONG_LONG 17
 # define ULONG 18
