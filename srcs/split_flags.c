@@ -6,61 +6,68 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 19:54:17 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/17 13:50:06 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 13:39:56 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			count_words(char *str, char delim)
+int 		new_count(const char *str, char delim)
 {
-	size_t	i;
-	int		count;
+	int 		count;
+	size_t		i;
 
-	count = 0;
 	i = 0;
+	count = 0;
+	str[i] == delim ? i++ : i;
+	str[i] == delim ? i++ : i;
+	count++;
 	while (str[i])
 	{
-		if (str[i] == delim)
+		if (str[i] == delim && str[i + 1])
+		{
+			if (str[i + 1] == delim)
+				i++;
 			count++;
+		}
 		i++;
 	}
-	if (i > 0 && str[i - 1] != delim)
-		count++;
 	return (count);
 }
 
-char		**split_flags(const char *str, char delim)
+char		*add_part(const char *str, size_t *start, char delim)
+{
+	char 	*part;
+	size_t	begin;
+	size_t	end;
+
+	begin = 0;
+	end = 0;
+	str[*start + begin] == delim ? begin++ : begin;
+	str[*start + begin] == delim ? begin++ : begin;
+	while (str[*start + begin + end] && str[*start + begin + end] != delim)
+		end++;
+	part = ft_strsub(str, *start, end + begin);
+	*start += end + begin;
+	return (part);
+}
+
+char 		**split_flags(const char *str, char delim)
 {
 	size_t		start;
-	size_t		end;
-	int			i;
-	int			words;
-	char		**result;
+	size_t		i;
+	int 		words;
+	char 		**result;
 
 	if (!str)
 		return (NULL);
-	words = count_words(str, delim);
+	words = new_count(str, delim);
 	if (!(result = (char**)malloc(sizeof(char*) * (words + 1))))
 		return (NULL);
 	result[words] = 0;
-	i = 0;
 	start = 0;
+	i = 0;
 	while (i < words)
-	{
-		end = 0;
-		if (str[start] == delim && str[start + 1] == delim)
-		{
-			result[i] = ft_strdup("%");
-			start += 1;
-			i++;
-		}
-		if (str[start] == delim)
-			start++;
-		while (str[start + end] && str[start + end] != delim)
-			end++;
-		result[i++] = ft_strsub(str, start, end);
-		start += end;
-	}
+		result[i++] = add_part(str, &start, delim);
 	return (result);
 }

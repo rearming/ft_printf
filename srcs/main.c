@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/17 14:36:33 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:17:14 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,10 @@ int 		ft_printf(const char *format, ...)
 
 	va_start(g_printf.ap, format);
 	parts = split_flags(format, '%');
-	ft_lstaddback(&g_printf.lst_buf, parts[0], ft_strlen(parts[0]));
-	i = 1;
+	i = 0;
 	while (parts[i])
 	{
-		if (parts[i][0])
-		{
-			if (parts[i][0] == '%' && !parts[i][1])
-			{
-				ft_lstaddback(&g_printf.lst_buf, parts[i], ft_strlen(parts[i]));
-				ft_lstaddback(&g_printf.lst_buf, parts[i + 1], ft_strlen(parts[i + 1]));
-				i++;
-			}
-			else
-				add_buf_node(parts[i]);
-		}
+		add_buf_node(parts[i]);
 		i++;
 	}
 	va_end(g_printf.ap);
@@ -98,32 +87,29 @@ int			main(void)
 	printf("\t\tJust text:\n\n");
 
 	write(1, "ft_printf: ", 11);
-
-	ft_printf("jopa lel kek%%%% ynolikpro|\n"); //todo handle % (пробела нет потому что это якобы флаг)
+	ft_printf("jopa lel kek%%%% ynolikpro|\n");
 	printf("printf:    jopa lel kek%%%% ynolikpro|\n");
-
 
 	printf("\n--------------------------------\n");
 	printf("\t\tChar:\n\n");
 
-	ft_printf("ft_printf: %c\n", '&');
+	write(1, "ft_printf: ", 11);
+	ft_printf("%c\n", '&');
 	printf("printf:    %c\n", '&');
 
 	printf("\n--------------------------------\n");
 	printf("\t\tString:\n\n");
 
 	write(1, "ft_printf: ", 11);
-
-	ft_printf("zez%10.4s\n", "ooor");
-	printf("printf:    zez%10.4s\n", "ooor");
+	ft_printf("zez%10.4s\n", "oooraa");
+	printf("printf:    zez%10.4s\n", "oooraa");
 
 	printf("\n--------------------------------\n");
 	printf("\t\tInt:\n\n");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("zez%10.4i\n", 42);
-
-	printf("printf:    zez%10.4i\n", 42);
+	ft_printf("zez%10.5i\n", 42);
+	printf("printf:    zez%10.5i\n", 42);
 
 	return (0);
 }

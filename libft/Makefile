@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libft.a
-FLGS = -Wall -Wextra -Werror -O3
+FLGS = -Wall -Wextra -O2
 SRCS = ./srcs/ft_atoi.c ./srcs/ft_bzero.c ./srcs/ft_isalnum.c \
 	./srcs/ft_isalpha.c ./srcs/ft_isascii.c ./srcs/ft_isdigit.c \
 	./srcs/ft_isprint.c ./srcs/ft_memccpy.c ./srcs/ft_memchr.c \

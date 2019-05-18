@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:49:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/17 10:45:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 13:35:26 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,29 @@
 #include <tgmath.h>
 #include <limits.h>
 
+int 		new_count(const char *str, char delim);
+
 int 	main(void)
 {
 	char 	*str = "hey %a%b%c%%%brother ";
+	char 	*str2 = "%%privet%010i%%%c-zopa%";
 	char 	**res;
 	int 	i;
 
 	i = 0;
 	//res = ft_strsplit(str, '%');
-	res = split_flags(str, '%');
+	/*res = split_flags(str, '%');
 	while (res[i])
 	{
 		printf("res: [%s]\n", res[i]);
+		i++;
+	}*/
+	//str2 = "jopa lel kek%%%% ynolikpro|";
+	printf("there are [%i] parts in [%s]\n", new_count(str2, '%'), str2);
+	res = split_flags(str2, '%');
+	while (res[i])
+	{
+		printf("res[%i]: [%s]\n", i, res[i]);
 		i++;
 	}
 	return (0);

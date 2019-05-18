@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/16 17:30:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/18 13:54:15 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,16 @@ t_format	get_format(char *part)
 {
 	t_format	format;
 
+	format.flags = (t_flags){0, 0, 0, 0, 0};
 	format = (t_format){format.flags, 0, 0, 0, 0};
+	if ((part[format.i + 1] && part[format.i] == '%'
+		&& part[format.i + 1] == '%')
+			|| (part[format.i] != '%'))
+		return ((t_format)
+				{format.flags, 0, 0, BREAK, BREAK,
+	 				part[format.i + 1] == '%' ? 1 : 0});
+	else
+		format.i++;
 	format.flags = get_flags(part, &format.i);
 	format.width = get_width(part, &format.i);
 	format.precision = get_accuracy(part, &format.i);
