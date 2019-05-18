@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 16:53:41 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 17:00:15 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ char		**split_flags(const char *str, char delim);
 */
 
 char		*ft_lltoa(long long n);
+char		*ft_ulltoa(unsigned long long int n);
 
 #endif

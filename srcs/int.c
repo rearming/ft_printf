@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 18:23:52 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:25:27 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ char 		*convert_signed_arg(t_format format)
 char 		*convert_unsigned_arg(t_format format)
 {
 	if (format.type_flag == NOT_SET)
-		return (ft_lltoa(va_arg(g_printf.ap, unsigned)));
+		return (ft_ulltoa(va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == CHAR)
-		return (ft_lltoa((char)va_arg(g_printf.ap, unsigned)));
+		return (ft_ulltoa((unsigned char)va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == SHORT)
-		return (ft_lltoa((short)va_arg(g_printf.ap, unsigned)));
+		return (ft_ulltoa((unsigned short)va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == LONG)
-		return (ft_lltoa(va_arg(g_printf.ap, unsigned long)));
+		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long)));
 	if (format.type_flag == LONG_LONG)
-		return (ft_lltoa(va_arg(g_printf.ap, unsigned long long)));
+		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long long)));
 	return (NULL);
 }
 

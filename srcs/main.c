@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 18:29:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:37:30 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,8 +188,8 @@ int			main(void)
 	ft_putchar('\n');
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("big prec: %10.5llu &&&$%%\n", 98899llu);
-	printf("printf:    big prec: %10.5llu &&&$%%\n", 98899llu);
+	ft_printf("big prec: %10.5llu &&&$%%\n", 9889988888888888888llu);
+	printf("printf:    big prec: %10.5llu &&&$%%\n", 9889988888888888888llu);
 
 	return (0);
 }
