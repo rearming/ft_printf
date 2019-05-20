@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 21:02:37 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:10:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_flags		get_flags(char *part, int *i)
 		(*i)++;
 	}
 	flags.minus ? flags.zero = 0 : flags.zero;
+	flags.plus ? flags.space = 0 : flags.space;
 	return (flags);
 }
 
@@ -44,7 +45,10 @@ int			get_width(char *part, int *i)
 	int		res;
 
 	if (part[*i] == '*')
+	{
+		(*i)++;
 		return (va_arg(g_printf.ap, int));
+	}
 	if (!ft_isdigit(part[*i]))
 		return (BREAK);
 	res = ft_atoi(&part[*i]);
@@ -60,7 +64,10 @@ int			get_precision(char *part, int *i)
 		return (NOT_SET);
 	(*i)++;
 	if (part[*i] == '*')
+	{
+		(*i)++;
 		return (va_arg(g_printf.ap, int));
+	}
 	res = ft_atoi(&part[*i]);
 	if (!ft_isdigit(part[*i]))
 		*i -= 1;
@@ -84,10 +91,6 @@ int			get_type_flag(char *part, int *i)
 		else if (--(*i) || part[*i])
 			return (SHORT);
 	}
-	if (part[(*i)] == 'j')
-		return (LONG);
-	if (part[*i] == 'z')
-		return (SIZE_T);
 	if (part[*i] == 'L')
 		return (LDOUBLE);
 	if (part[*i] == 'c' || part[*i] == 's' || part[*i] == 'p'
@@ -131,13 +134,13 @@ t_format	get_format(char *part)
 	t_format	format;
 
 	format.flags = (t_flags){0, 0, 0, 0, 0};
-	format = (t_format){format.flags, 0, 0, 0, 0};
+	format = (t_format){format.flags, 0, 0, 0, 0, 0};
 	if ((part[format.i + 1] && part[format.i] == '%'
 		&& part[format.i + 1] == '%')
 			|| (part[format.i] != '%'))
 		return ((t_format)
 				{format.flags, 0, 0, BREAK, BREAK,
-	 				part[format.i + 1] == '%' ? 1 : 0});
+	part[format.i + 1] == '%' ? 1 : 0});
 	else
 		format.i++;
 	format.flags = get_flags(part, &format.i);

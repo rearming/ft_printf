@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 20:39:35 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:26:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ extern t_printf	g_printf;
 
 int 		ft_printf(const char *format, ...);
 int			ft_printf_fd(const char *format, int fd, ...);
+void		print_list(t_list *list, int fd);
+void		free_list(t_list **list);
+void		add_buf_node(char *part);
 
 /*
 ** format parsing functions

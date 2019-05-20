@@ -6,13 +6,14 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/13 20:11:30 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/15 12:01:04 by sselusa          ###   ########.fr        #
+#    Updated: 2019/05/20 11:12:24 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-FLGS = -Wall -Wextra -O2
+FLGS = -Wall -Wextra -Werror -O2
 SRCS = $(wildcard srcs/*.c)
+SRCS_LIB = $(wildcard libft/srcs/*.c)
 INCL = ./includes
 LBFT = -lft
 LFTD = ./libft
@@ -23,17 +24,14 @@ OBJS = $(wildcard *.o)
 all: $(NAME)
 
 $(NAME):
-	@make -C $(LFTD)
-	@gcc -c $(FLGS) $(SRCS) -I $(INCL) -I $(LFTD)/includes
+	@gcc $(FLGS) $(SRCS_LIB) $(SRCS) -c -I $(INCL) -I $(LFTD)/includes
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 clean:
-	@make -C $(LFTD) clean
 	@rm -f $(OBJS)
 
 fclean: clean
-	@make -C $(LFTD) fclean
 	@rm -f $(NAME)
 
 re: fclean all

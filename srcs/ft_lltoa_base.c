@@ -6,16 +6,16 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 19:22:51 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/18 21:16:01 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:31:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char 		*alloc_formatted(long long nbr, int base, char capital, char format)
+char		*alloc_formatted(long long nbr, int base, char capital, char format)
 {
-	int 	size;
-	char 	*res;
+	int		size;
+	char	*res;
 
 	format = base > 10 || base == 8 ? format : 0;
 	size = nbr < 0 ? 1 : 0;
@@ -43,15 +43,17 @@ char 		*alloc_formatted(long long nbr, int base, char capital, char format)
 
 char		*ft_lltoa_base(long long nbr, int base, char capital, char format)
 {
-	char 		*res;
+	char		*res;
 	size_t		len;
-	char 		c;
-	int 		limit;
+	char		c;
+	size_t		limit;
 
 	c = capital ? 'A' : 'a';
 	limit = nbr < 0 ? 1 : 0;
 	if (base > 10)
 		limit += format ? 2 : 0;
+	if (base == 8)
+		limit += format ? 1 : 0;
 	res = alloc_formatted(nbr, base, capital, format);
 	nbr *= nbr < 0 ? -1 : 1;
 	len = ft_strlen(res);

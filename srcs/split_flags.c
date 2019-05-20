@@ -6,15 +6,15 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 19:54:17 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 13:39:56 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/20 09:37:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int 		new_count(const char *str, char delim)
+int			new_count(const char *str, char delim)
 {
-	int 		count;
+	int			count;
 	size_t		i;
 
 	i = 0;
@@ -37,9 +37,9 @@ int 		new_count(const char *str, char delim)
 
 char		*add_part(const char *str, size_t *start, char delim)
 {
-	char 	*part;
-	size_t	begin;
-	size_t	end;
+	char		*part;
+	size_t		begin;
+	size_t		end;
 
 	begin = 0;
 	end = 0;
@@ -52,12 +52,12 @@ char		*add_part(const char *str, size_t *start, char delim)
 	return (part);
 }
 
-char 		**split_flags(const char *str, char delim)
+char		**split_flags(const char *str, char delim)
 {
 	size_t		start;
-	size_t		i;
-	int 		words;
-	char 		**result;
+	int			i;
+	int			words;
+	char		**result;
 
 	if (!str)
 		return (NULL);

@@ -23,7 +23,7 @@ void		ft_u_putchar_fd(char *c, int fd)
 void		ft_u_putstr_fd(char *str, int fd)
 {
 	size_t		i;
-	size_t 		len;
+	size_t		len;
 
 	i = 0;
 	if (!str)

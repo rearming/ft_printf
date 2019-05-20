@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/18 20:51:00 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:20:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		fill_differ(int differ, t_format format)
 {
-	char 	*temp;
+	char	*temp;
 
 	if (differ)
 	{
@@ -30,12 +30,11 @@ void		fill_differ(int differ, t_format format)
 
 void		fill_int_format(t_format format, char *arg)
 {
-	size_t		len;
+	int			len;
 	int			differ;
 	char		*temp;
 
-	if (!arg)
-		raise_error(ERR_ARG);
+	!arg ? raise_error(ERR_NULL_STR) : arg;
 	len = ft_strlen(arg);
 	temp = ft_strnew(len < format.precision ? format.precision : len);
 	ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
@@ -60,9 +59,8 @@ void		fill_int_format(t_format format, char *arg)
 
 void		fill_format(t_format format, char *arg)
 {
-	size_t		len;
+	int			len;
 	int			differ;
-	char		*temp;
 
 	if (!arg)
 		raise_error(ERR_ARG);
