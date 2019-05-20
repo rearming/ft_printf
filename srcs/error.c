@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/14 17:49:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/15 10:56:50 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/16 13:22:37 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/16 13:22:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int 	main(void)
+void		raise_error(int err_code)
 {
-	printf("%010.2lf|\n", 3.29492365);
-	return (0);
+	exit(err_code);
 }

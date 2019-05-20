@@ -6,12 +6,12 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/30 15:49:46 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/16 20:02:14 by sselusa          ###   ########.fr        #
+#    Updated: 2019/05/20 17:34:26 by sselusa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-FLGS = -Wall -Wextra -Werror -O3
+FLGS = -Wall -Wextra -O2
 SRCS = ./srcs/ft_atoi.c ./srcs/ft_bzero.c ./srcs/ft_isalnum.c \
 	./srcs/ft_isalpha.c ./srcs/ft_isascii.c ./srcs/ft_isdigit.c \
 	./srcs/ft_isprint.c ./srcs/ft_memccpy.c ./srcs/ft_memchr.c \

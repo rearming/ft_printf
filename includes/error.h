@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 18:50:22 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 09:12:46 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/16 13:22:57 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/16 17:19:57 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int					ft_isprint(int chr)
-{
-	return ((chr >= 32) & (chr <= 126));
-}
+# define ERR_MALLOC 100
+# define ERR_NULL_STR 101
+# define ERR_ARG 102
+
+#endif

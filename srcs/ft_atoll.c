@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 20:27:04 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/13 20:28:10 by sselusa          ###   ########.fr       */
+/*   Created: 2019/05/18 20:28:25 by rearming          #+#    #+#             */
+/*   Updated: 2019/05/18 20:28:25 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int						ft_printf_fd(const char *format, ...)
+long long	ft_atoll(char *str)
 {
-	return (0);
+	return (ft_atoi_base(str, 10));
 }

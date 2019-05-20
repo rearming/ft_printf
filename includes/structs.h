@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 11:28:25 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 17:14:37 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/20 17:34:10 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ typedef struct			s_format
 {
 	t_flags				flags;
 	int 				width;
-	int 				accuracy;
+	int 				precision;
+	int 				type_flag;
 	int 				type;
+	int 				i;
 }						t_format;
 
 typedef struct			s_printf

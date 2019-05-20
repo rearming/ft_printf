@@ -6,13 +6,13 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:19:09 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/15 11:39:53 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/20 09:12:46 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	skip_obs(char *str, int *is_neg)
+static int		skip_obs(char *str, int *is_neg)
 {
 	int		i;
 
@@ -31,12 +31,12 @@ static int	skip_obs(char *str, int *is_neg)
 	return (i);
 }
 
-long		ft_atoi_base(char *str, int base)
+long long		ft_atoi_base(char *str, int base)
 {
-	int		i;
-	int		is_neg;
-	long	res;
-	int		digits;
+	int			i;
+	int			is_neg;
+	long long	res;
+	int			digits;
 
 	res = 0;
 	is_neg = 1;
