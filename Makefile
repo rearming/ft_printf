@@ -1,37 +1,55 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/05/13 20:11:30 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/20 11:12:24 by sleonard         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libftprintf.a
-FLGS = -Wall -Wextra -Werror -O2
-SRCS = $(wildcard srcs/*.c)
-SRCS_LIB = $(wildcard libft/srcs/*.c)
-INCL = ./includes
-LBFT = -lft
-LFTD = ./libft
-OBJS = $(wildcard *.o)
 
-.PHONY: all clean fclean re
+FLAGS = -Wall -Wextra -Werror -O2
+
+LIBFT = ./libft
+
+LIBFT_INCL = ./libft/includes
+
+PRINTF_INCL = ./includes
+
+DIR_S = ./srcs
+
+DIR_O = temp
+
+SOURCES =				\
+		debug.c			\
+		error.c			\
+		format_filler.c	\
+		format_parser.c	\
+		ft_atoll.c		\
+		ft_lltoa.c		\
+		ft_lltoa_base.c	\
+		ft_u_putstr_fd.c\
+		int.c			\
+		ft_printf.c		\
+		split_flags.c	\
+		string.c		\
+		int.c			\
+
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
 all: $(NAME)
 
-$(NAME):
-	@gcc $(FLGS) $(SRCS_LIB) $(SRCS) -c -I $(INCL) -I $(LFTD)/includes
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+$(NAME): $(OBJS)
+	make -C $(LIBFT)
+	cp libft/libft.a ./$(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
+
+$(DIR_O)/%.o: $(DIR_S)/%.c
+	@mkdir -p $(DIR_O)
+	gcc $(FLAGS) -I $(PRINTF_INCL) -I $(LIBFT_INCL) -c $< -o $@
 
 clean:
-	@rm -f $(OBJS)
+	rm -rf $(OBJS)
+	rm -rf $(DIR_O)
+	make clean -C $(LIBFT)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -rf $(NAME)
+	make fclean -C $(LIBFT)
 
 re: fclean all

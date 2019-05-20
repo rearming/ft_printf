@@ -30,8 +30,7 @@ extern t_printf	g_printf;
 */
 
 int 		ft_printf(const char *format, ...);
-int			ft_printf_fd(const char *format, int fd, ...);
-void		print_list(t_list *list, int fd);
+int			print_list(t_list **list, int fd);
 void		free_list(t_list **list);
 void		add_buf_node(char *part);
 
@@ -55,7 +54,6 @@ void		fill_format(t_format format, char *arg);
 void		add_text(char *part, t_format format);
 void		add_string(char *part, t_format format);
 void		add_char(char *part, t_format format);
-void		add_uchar(char *part, t_format format);
 
 /*
 ** int functions
@@ -84,7 +82,7 @@ void		raise_error(int err_code);
 */
 
 void		ft_u_putchar_fd(char *c, int fd);
-void		ft_u_putstr_fd(char *str, int fd);
+int ft_u_putstr_fd(char *str, int fd);
 
 /*
 ** split flags function
