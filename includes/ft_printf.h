@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/14 17:41:07 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:35:43 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,10 @@ void		add_short(char *part, t_format format);
 void		add_ushort(char *part, t_format format);
 void		add_int(char *part, t_format format);
 void		add_uint(char *part, t_format format);
+
+/*
+**	float, double & long double
+*/
+char		*check_fields(t_ld *ld);
 
 #endif
