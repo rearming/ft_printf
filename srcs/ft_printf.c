@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 10:57:04 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 13:57:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,27 @@
 
 t_printf	g_printf;
 
-void		print_list(t_list *list, int fd)
+int			print_list(t_list **list, int fd)
 {
-	while (list)
+	int		total_printed;
+	t_list	*temp;
+
+	total_printed = 0;
+	if (!list)
+		raise_error(ERR_NULL_LIST);
+	fd = 2;
+	while (*list)
 	{
-		ft_u_putstr_fd(list->content, fd);
-		list = list->next;
+		//total_printed += ft_u_putstr_fd((*list)->content, fd);
+		//total_printed += printf("%s", (*list)->content);
+		if ((*list)->content)
+			total_printed += write(1, ((*list)->content), ft_strlen((*list)->content));
+		temp = (*list);
+		(*list) = (*list)->next;
+		free(temp->content);
+		free(temp);
 	}
+	return (total_printed);
 }
 
 void		free_list(t_list **list)
@@ -63,6 +77,7 @@ int 		ft_printf(const char *format, ...)
 {
 	int			i;
 	char 		**parts;
+	int 		ret_val;
 
 	va_start(g_printf.ap, format);
 	parts = split_flags(format, '%');
@@ -73,7 +88,7 @@ int 		ft_printf(const char *format, ...)
 		i++;
 	}
 	va_end(g_printf.ap);
-	print_list(g_printf.lst_buf, 1);
-	free_list(&g_printf.lst_buf);
-	return (0);
+	ret_val = print_list(&g_printf.lst_buf, 1);
+	//free_list(&g_printf.lst_buf);
+	return (ret_val);
 }
