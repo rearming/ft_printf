@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld_field_check.c                                   :+:      :+:    :+:   */
+/*   fields_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:34:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 17:43:30 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:03:48 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void				check_exp_max(t_ld *ld)
 		ld->str = ft_strdup("NaN");
 }
 
-char				*check_fields(t_ld *ld)
+char					*check_fields(t_ld *ld)
 {
 	if (ld->exp == 0)
 		check_exp_zero(ld);
