@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 11:28:25 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/16 15:52:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 17:34:10 by sselusa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,19 @@ typedef struct			s_printf
 	t_list				*lst_buf;
 	va_list 			ap;
 }						t_printf;
+
+union 					u_ld
+{
+	long double			ld_tmp;
+	__int128_t			int_tmp;
+};
+
+typedef struct			s_ld
+{
+	union u_ld			ld;
+	char				*str;
+	int					exp;
+	int					negative;
+}						t_ld;
 
 #endif

@@ -6,7 +6,11 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/30 15:49:46 by sselusa           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2019/05/20 14:39:38 by sleonard         ###   ########.fr        #
+=======
+#    Updated: 2019/05/20 17:34:26 by sselusa          ###   ########.fr        #
+>>>>>>> fa16dbcda3f8ed23604a812e7f78f590506a8c5a
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +38,7 @@ SRCS = ./srcs/ft_atoi.c ./srcs/ft_bzero.c ./srcs/ft_isalnum.c \
 	./srcs/ft_lstadd.c ./srcs/ft_lstiter.c ./srcs/ft_lstmap.c \
 	./srcs/get_next_line.c ./srcs/ft_lstaddback.c ./srcs/ft_power.c \
 	./srcs/ft_count_digits.c ./srcs/ft_count_digits_base.c \
-	./srcs/ft_atoi_base.c
+	./srcs/ft_atoi_base.c ./srcs/ft_ultoa.c ./srcs/ft_abs.c
 INCL = ./includes
 OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_isascii.o ./ft_isdigit.o ./ft_isprint.o ./ft_memccpy.o \
@@ -53,7 +57,7 @@ OBJS = ./ft_atoi.o ./ft_bzero.o ./ft_isalnum.o ./ft_isalpha.o \
 	./ft_lstadd.o ./ft_lstiter.o ./ft_lstmap.o ./get_next_line.o \
 	./ft_lstaddback.o ./ft_power.o \
 	./ft_count_digits.o ./ft_count_digits_base.o \
-	./ft_atoi_base.o
+	./ft_atoi_base.o ./ft_ultoa.o ./ft_abs.o
 
 .PHONY: all clean fclean re
 

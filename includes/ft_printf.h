@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/05/20 10:39:04 by sleonard         ###   ########.fr       */
+=======
+/*   Updated: 2019/05/20 17:34:08 by sselusa          ###   ########.fr       */
+>>>>>>> fa16dbcda3f8ed23604a812e7f78f590506a8c5a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +102,10 @@ char		*ft_lltoa(long long n);
 char		*ft_ulltoa(unsigned long long int n);
 char		*ft_lltoa_base(long long nbr, int base, char capital, char format);
 long long	ft_atoll(char *str);
+
+/*
+**	float, double & long double
+*/
+char		*check_fields(t_ld *ld);
 
 #endif
