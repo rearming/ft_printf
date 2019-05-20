@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 13:57:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:26:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,36 @@ int			print_list(t_list **list, int fd)
 	total_printed = 0;
 	if (!list)
 		raise_error(ERR_NULL_LIST);
-	fd = 2;
+
+	size_t 	total_len;
+	t_list	*tmp_count;
+	char 	*buffer;
+	int 	new_start;
+
+	fd = 1;
+	tmp_count = *list;
+	total_len = 0;
+	new_start = 0;
+	while (tmp_count)
+	{
+		total_len += tmp_count->content_size - 1;
+		tmp_count = tmp_count->next;
+	}
+	buffer = (char*)malloc(sizeof(char) * (total_len + 1));
 	while (*list)
 	{
 		//total_printed += ft_u_putstr_fd((*list)->content, fd);
 		//total_printed += printf("%s", (*list)->content);
-		if ((*list)->content)
-			total_printed += write(1, ((*list)->content), ft_strlen((*list)->content));
+		/*if ((*list)->content)
+			total_printed += write(1, ((*list)->content), (*list)->content_size - 1);*/
+		ft_memcpy(&buffer[new_start], (*list)->content, (*list)->content_size - 1);
+		new_start += (*list)->content_size - 1;
 		temp = (*list);
 		(*list) = (*list)->next;
 		free(temp->content);
 		free(temp);
 	}
+	write(fd, buffer, total_len);
 	return (total_printed);
 }
 

@@ -6,13 +6,13 @@
 #    By: sselusa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/13 20:11:30 by sselusa           #+#    #+#              #
-#    Updated: 2019/05/20 14:37:29 by sleonard         ###   ########.fr        #
+#    Updated: 2019/05/20 14:39:38 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -02
+FLAGS = -Wall -Wextra -Werror -O2
 
 LIBFT = ./libft
 
