@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:49:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 10:49:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 18:23:06 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,21 @@ int 	main(void)
 
 	i = 0;
 	//printf("%#10.4hhx\n", 255);
-	ft_printf("ptr: [%20p]\n", &i);
+/*	ft_printf("ptr: [%20p]\n", &i);
 	ft_printf("int ptr: [%20o]\n", 255);
 	ft_printf("hex: [%#lx]\n", &i);
 
 	printf("ptr: [%20p]\n", &i);
 	printf("int ptr: [%20o]\n", 255);
-	printf("hex: [%#lx]\n", &i);
+	printf("hex: [%#lx]\n", &i);*/
+
+	float			num1 = 123.123456;
+	double			num2 = 123.123456;
+	long double 	num3 = 123.123456L;
+
+	printf("float: [%f]\n", num1);
+	printf("double: [%f]\n", num1);
+	printf("long double: [%Li]\n", 2156551651LL);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 19:22:51 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/20 10:31:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 20:18:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*alloc_formatted(long long nbr, int base, char capital, char format)
 	res = ft_strnew(size);
 	ft_memset(res, '*', size);
 	res[0] = nbr < 0 ? '-' : '+';
-	if (format)
+	if (format && nbr)
 	{
 		res[res[0] == '-' ? 1 : 0] = '0';
 		if (base != 8)
@@ -50,6 +50,7 @@ char		*ft_lltoa_base(long long nbr, int base, char capital, char format)
 
 	c = capital ? 'A' : 'a';
 	limit = nbr < 0 ? 1 : 0;
+	format = nbr ? format : 0;
 	if (base > 10)
 		limit += format ? 2 : 0;
 	if (base == 8)

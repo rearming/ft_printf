@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:20:52 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 09:37:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 13:10:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		add_text(char *part, t_format format)
 
 void		add_string(char *part, t_format format)
 {
-	fill_format(format, va_arg(g_printf.ap, char*));
+	fill_text_format(format, va_arg(g_printf.ap, char*));
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
@@ -37,9 +37,24 @@ void		add_char(char *part, t_format format)
 	res = ft_strnew(1);
 	arg = va_arg(g_printf.ap, int);
 	res[0] = (char)arg;
-	fill_format(format, res);
+	format.precision = 1;
+	fill_text_format(format, res);
 	free(res);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
+	free(part);
+}
+
+void		add_percent(char *part, t_format format)
+{
+	char	*res;
+
+	res = ft_strnew(1);
+	res[0] = '%';
+	format.precision = 1;
+	fill_text_format(format, res);
+	free(res);
+	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+				  ft_strlen(&part[format.i]) + 1);
 	free(part);
 }

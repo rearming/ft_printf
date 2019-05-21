@@ -6,13 +6,13 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 10:57:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 10:57:54 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 19:32:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			main(void)
+void			my_tests(void)
 {
 	printf("\n--------------------------------\n");
 	printf("\t\tJust text:\n\n");
@@ -36,12 +36,12 @@ int			main(void)
 	printf("\t\tString:\n\n");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("zez%10.4s\n", "oooraa");
-	printf("printf:    zez%10.4s\n", "oooraa");
+	ft_printf("zez%10s\n", "string");
+	printf("printf:    zez%10s\n", "string");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("plus string %+10.4s\n", "oooraa");
-	printf("printf:    plus string %+10.4s\n", "oooraa");
+	ft_printf("plus string %+010.s\n", "oooraa");
+	printf("printf:    plus string %+010.s\n", "oooraa");
 
 	printf("\n--------------------------------\n");
 	printf("\t\tInt:\n\n");
@@ -204,5 +204,30 @@ int			main(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("robots: %#10b &&&$%%\n", 255);
 
-	return (0);
+	printf("\n--------------------------------\n");
+	printf("\t\tFloat:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("lel float%%: %#+10f &&&$%%\n", (float)666.123123);
+	printf("printf:    lel float%%: %#+10f &&&$%%\n", (float)666.123123);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tDouble:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("NO prec#: %+10.0f &&&$%%\n", (double)5662.1345111);
+	printf("printf:    NO prec#: %+10.0f &&&$%%\n", (double)5662.1345111);
+
+	ft_putchar('\n');
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("Dobble prec#: %+10.3f &&&$%%\n", (double)5662.1345111);
+	printf("printf:    Dobble prec#: %+10.3f &&&$%%\n", (double)5662.1345111);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tLong double:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("SUPER LONG D: %Lf &&&$%%\n", 1243132.1343524L);
+	printf("printf:    SUPER LONG D: %Lf &&&$%%\n", 1243132.1343524L);
 }

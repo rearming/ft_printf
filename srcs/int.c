@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 10:56:17 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 13:54:33 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 char		*convert_signed_arg(t_format format)
 {
-	if (format.type_flag == NOT_SET)
+	if (format.type_flag == NO_FLAG)
 		return (ft_lltoa(va_arg(g_printf.ap, int)));
 	if (format.type_flag == CHAR)
 		return (ft_lltoa((char)va_arg(g_printf.ap, int)));
 	if (format.type_flag == SHORT)
 		return (ft_lltoa((short)va_arg(g_printf.ap, int)));
 	if (format.type_flag == LONG)
-	{
-		//print_format(format);
 		return (ft_lltoa(va_arg(g_printf.ap, long)));
-	}
-	if (format.type_flag == LONG_LONG)
+	if (format.type_flag == LONG_LONG || format.type_flag == LDOUBLE)
 		return (ft_lltoa(va_arg(g_printf.ap, long long)));
 	return (NULL);
 }
@@ -34,7 +31,7 @@ char		*convert_unsigned_arg(t_format format)
 {
 	if (format.type == PTR)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long long)));
-	if (format.type_flag == NOT_SET)
+	if (format.type_flag == NO_FLAG)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == CHAR)
 		return (ft_ulltoa((unsigned char)va_arg(g_printf.ap, unsigned)));
@@ -42,7 +39,7 @@ char		*convert_unsigned_arg(t_format format)
 		return (ft_ulltoa((unsigned short)va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == LONG)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long)));
-	if (format.type_flag == LONG_LONG)
+	if (format.type_flag == LONG_LONG || format.type_flag == LDOUBLE)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long long)));
 	return (NULL);
 }
@@ -52,9 +49,10 @@ void		add_signed(char *part, t_format format)
 	char	*arg;
 
 	format.flags.zero =
-			format.precision != NOT_SET ? 0 : format.flags.zero;
-	format.precision = format.precision == NOT_SET ? 0 : format.precision;
+			format.precision != NO_FLAG ? 0 : format.flags.zero;
 	arg = convert_signed_arg(format);
+	if (!ft_atoi(arg))
+		arg[0] = 0;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_int_format(format, arg);
 	free(arg);
@@ -67,8 +65,10 @@ void		add_unsigned(char *part, t_format format)
 {
 	char	*arg;
 
-	format.precision = format.precision == NOT_SET ? 0 : format.precision;
+	format.precision = format.precision == NO_FLAG ? 0 : format.precision;
 	arg = convert_unsigned_arg(format);
+	if (!ft_atoi(arg))
+		arg[0] = 0;
 	if (format.precision % 10 == 0 && format.precision != 0)
 	{
 		format.flags.zero = 1;
@@ -87,9 +87,8 @@ void		add_base(char *part, t_format format)
 	char	*arg;
 
 	format.flags.zero =
-			format.precision != NOT_SET ? 0 : format.flags.zero;
+			format.precision != NO_FLAG ? 0 : format.flags.zero;
 	format.flags.plus = 0;
-	format.precision = format.precision == NOT_SET ? 0 : format.precision;
 	arg = convert_unsigned_arg(format);
 	if (format.type == B_HEX || format.type == S_HEX || format.type == PTR)
 		arg = ft_lltoa_base(ft_atoll(arg), 16, format.type == B_HEX ? 1 : 0,
@@ -97,6 +96,8 @@ void		add_base(char *part, t_format format)
 	else
 		arg = ft_lltoa_base(ft_atoll(arg),
 				format.type == BINARY ? 2 : 8, 0, format.flags.grid ? 1 : 0);
+	if (!ft_atoi_base(arg, 16) || !ft_atoi_base(arg, 8))
+		arg[0] = 0;
 	fill_int_format(format, arg);
 	free(arg);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],

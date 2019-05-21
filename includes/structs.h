@@ -15,22 +15,6 @@
 
 # include "ft_printf.h"
 
-typedef struct			s_type
-{
-	char 				tp_char;
-	unsigned char		tp_uchar;
-	short 				tp_short;
-	unsigned short		tp_ushort;
-	int 				tp_int;
-	unsigned int		tp_uint;
-	long				tp_long;
-	unsigned long 		tp_ulong;
-	float 				tp_float;
-	double				tp_double;
-	long double			tp_l_double;
-	char 				*string;
-}						t_type;
-
 typedef struct			s_flags
 {
 	char 				zero;

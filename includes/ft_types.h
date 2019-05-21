@@ -35,10 +35,12 @@
 # define BINARY 29
 # define DATE 30
 # define NON_PRINT 31
+# define PERCENT 32
 
-# define NOTHING 32
+# define NOTHING 33
 
-# define NOT_SET -1
-# define BREAK -2
+# define NO_FLAG -1
+# define NO_VALUE -2
+# define BREAK -3
 
 #endif

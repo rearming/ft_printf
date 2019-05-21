@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 18:03:36 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/05/20 19:05:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void				get_a(t_ld *ld, int sign,
+static void			get_a(t_ld *ld, int sign,
 								long double num, int precision)
 {
 	unsigned long		whole;
@@ -28,11 +28,14 @@ static void				get_a(t_ld *ld, int sign,
 	else
 		ld->str = ft_strnew(0);
 	ld->str = ft_strcat(ld->str, ft_ultoa(whole));
-	ld->str = ft_strcat(ld->str, ".");
-	ld->str = ft_strncat(ld->str, ft_ultoa(fract), (size_t)precision);
+	if (precision != 0)
+	{
+		ld->str = ft_strcat(ld->str, ".");
+		ld->str = ft_strncat(ld->str, ft_ultoa(fract), (size_t) precision);
+	}
 }
 
-static t_ld				*parse_ld(long double num, int precision)
+static t_ld			*parse_ld(long double num, int precision)
 {
 	__int128_t			mask;
 	int					sign;
@@ -59,26 +62,60 @@ static t_ld				*parse_ld(long double num, int precision)
 	return (ld);
 }
 
-static char				*ftoa(long double num, int precision)
+static char			*ftoa(long double num, int precision)
 {
-	char				*a;
 	t_ld				*ld;
 
-	a = NULL;
-	if (precision == NOT_SET)
+	if (precision == NO_FLAG)
 		precision = 6;
 	ld = parse_ld(num, precision);
 	return (ld->str);
 }
 
-int						main(void)
+long double			get_doble_arg(t_format format)
 {
-	long double				num;
-	char					*a;
+	if (format.type_flag == LDOUBLE)
+		return (va_arg(g_printf.ap, long double));
+	return (va_arg(g_printf.ap, double));
+}
 
-	num = 123456789.123456789;
-	a = ftoa(num, 6);
-	printf("%s\n", a);
-	printf("%Lf\n", num);
-	return (0);
+void				fill_float_format(t_format format, char *arg)
+{
+	int			len;
+	int			differ;
+
+	if (!arg)
+		return ;
+	len = ft_strlen(arg);
+	differ = format.width > len ? format.width - len : 0;
+	if (format.flags.minus)
+	{
+		if (format.flags.plus)
+			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
+	}
+	fill_differ(differ, format);
+	if (!format.flags.minus)
+	{
+		if (format.flags.plus)
+			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
+	}
+}
+
+void				add_double(char *part, t_format format)
+{
+	char	*arg;
+
+	format.flags.zero =
+			format.precision != NO_FLAG ? 0 : format.flags.zero;
+	arg = ftoa(get_doble_arg(format), format.precision);
+	format.precision = format.precision == NO_FLAG ? 0 : format.precision;
+	//printf("The arg now: [%s]\n", arg);
+	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
+	fill_float_format(format, arg);
+	free(arg);
+	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+				  ft_strlen(&part[format.i]) + 1);
+	free(part);
 }

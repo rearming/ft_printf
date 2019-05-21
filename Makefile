@@ -13,7 +13,6 @@ DIR_S = ./srcs
 DIR_O = temp
 
 SOURCES =				\
-		debug.c			\
 		error.c			\
 		format_filler.c	\
 		format_parser.c	\
@@ -26,6 +25,8 @@ SOURCES =				\
 		split_flags.c	\
 		string.c		\
 		int.c			\
+		floats.c		\
+		fields_check.c	\
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

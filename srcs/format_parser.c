@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 10:10:03 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 13:37:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			get_width(char *part, int *i)
 		return (va_arg(g_printf.ap, int));
 	}
 	if (!ft_isdigit(part[*i]))
-		return (BREAK);
+		return (NO_VALUE);
 	res = ft_atoi(&part[*i]);
 	*i += ft_count_digits(res);
 	return (res);
@@ -61,7 +61,7 @@ int			get_precision(char *part, int *i)
 	int		res;
 
 	if (part[*i] != '.')
-		return (NOT_SET);
+		return (NO_FLAG);
 	(*i)++;
 	if (part[*i] == '*')
 	{
@@ -69,9 +69,8 @@ int			get_precision(char *part, int *i)
 		return (va_arg(g_printf.ap, int));
 	}
 	res = ft_atoi(&part[*i]);
-	if (!ft_isdigit(part[*i]))
-		*i -= 1;
-	*i += ft_count_digits(res);
+	if (ft_isdigit(part[*i]))
+		*i += ft_count_digits(res);
 	return (res);
 }
 
@@ -93,26 +92,23 @@ int			get_type_flag(char *part, int *i)
 	}
 	if (part[*i] == 'L')
 		return (LDOUBLE);
-	if (part[*i] == 'c' || part[*i] == 's' || part[*i] == 'p'
-	|| part[*i] == 'd' || part[*i] == 'i' || part[*i] == 'o'
-	|| part[*i] == 'u' || part[*i] == 'x' || part[*i] == 'X'
-	|| part[*i] == 'b')
-		return (NOT_SET);
+	if (get_type(part, i) != BREAK)
+		return (NO_FLAG);
 	else
 		return (BREAK);
 }
 
 int			get_type(char *part, int *i)
 {
-	if (part[*i] == 'c')
+	if (part[*i] == 'c' || part[*i] == 'C')
 		return (CHAR);
-	if (part[*i] == 's')
+	if (part[*i] == 's' || part[*i] == 'S')
 		return (STRING);
 	if (part[*i] == 'p')
 		return (PTR);
-	if (part[*i] == 'd' || part[*i] == 'i')
+	if (part[*i] == 'd' || part[*i] == 'D' || part[*i] == 'i')
 		return (INT);
-	if (part[*i] == 'u')
+	if (part[*i] == 'u' || part[*i] == 'U')
 		return (UNSIGNED);
 	if (part[*i] == 'o')
 		return (OCTAL);
@@ -120,12 +116,14 @@ int			get_type(char *part, int *i)
 		return (S_HEX);
 	if (part[*i] == 'X')
 		return (B_HEX);
-	if (part[*i] == 'f')
+	if (part[*i] == 'f' || part[*i] == 'F')
 		return (DOUBLE);
 	if (part[*i] == 'b')
 		return (BINARY);
 	if (part[*i] == 'r')
 		return (NON_PRINT);
+	if (part[*i] == '%')
+		return (PERCENT);
 	return (part[*i] == 'k' ? DATE : BREAK);
 }
 
@@ -135,12 +133,9 @@ t_format	get_format(char *part)
 
 	format.flags = (t_flags){0, 0, 0, 0, 0};
 	format = (t_format){format.flags, 0, 0, 0, 0, 0};
-	if ((part[format.i + 1] && part[format.i] == '%'
-		&& part[format.i + 1] == '%')
-			|| (part[format.i] != '%'))
+	if (part[format.i] != '%')
 		return ((t_format)
-				{format.flags, 0, 0, BREAK, BREAK,
-	part[format.i + 1] == '%' ? 1 : 0});
+				{format.flags, 0, 0, BREAK, BREAK, 0});
 	else
 		format.i++;
 	format.flags = get_flags(part, &format.i);
@@ -148,7 +143,7 @@ t_format	get_format(char *part)
 	format.precision = get_precision(part, &format.i);
 	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
 		return (format);
-	if (format.type_flag != NOT_SET)
+	if (format.type_flag != NO_FLAG)
 		format.i++;
 	if ((format.type = get_type(part, &format.i)) != BREAK)
 		format.i++;

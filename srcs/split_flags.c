@@ -6,13 +6,13 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 19:54:17 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 09:37:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/20 20:53:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			new_count(const char *str, char delim)
+int			count_parts(const char *str, char delim)
 {
 	int			count;
 	size_t		i;
@@ -47,6 +47,8 @@ char		*add_part(const char *str, size_t *start, char delim)
 	str[*start + begin] == delim ? begin++ : begin;
 	while (str[*start + begin + end] && str[*start + begin + end] != delim)
 		end++;
+	if (str[*start + begin + end] == delim && str[*start + begin + end + 1] == 0)
+		end++;
 	part = ft_strsub(str, *start, end + begin);
 	*start += end + begin;
 	return (part);
@@ -56,18 +58,18 @@ char		**split_flags(const char *str, char delim)
 {
 	size_t		start;
 	int			i;
-	int			words;
+	int			parts;
 	char		**result;
 
 	if (!str)
 		return (NULL);
-	words = new_count(str, delim);
-	if (!(result = (char**)malloc(sizeof(char*) * (words + 1))))
+	parts = count_parts(str, delim);
+	if (!(result = (char**)malloc(sizeof(char*) * (parts + 1))))
 		return (NULL);
-	result[words] = 0;
+	result[parts] = 0;
 	start = 0;
 	i = 0;
-	while (i < words)
+	while (i < parts)
 		result[i++] = add_part(str, &start, delim);
 	return (result);
 }

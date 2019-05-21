@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 11:05:12 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 09:12:46 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 13:11:06 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ char 		*debug_type(int code)
 			return ("DATE");
 		case NON_PRINT:
 			return ("NON_PRINTABLE");
-		case NOT_SET:
-			return ("NOT SET");
+		case PERCENT:
+			return ("PERCENT");
+		case NO_FLAG:
+			return ("NO_FLAG");
+		case NO_VALUE:
+			return ("NO_VALUE");
 		default:
 			return ("WTF???");
 	}
@@ -84,7 +88,7 @@ void		print_format(t_format format)
 	printf("\n");
 	printf("t_format fields:\n\n");
 	printf("width:     [%s]\n", format.width == BREAK ? "BREAK" : ft_itoa(format.width));
-	printf("precision: [%s]\n", format.precision == NOT_SET ? "NOT SET" : ft_itoa(format.precision));
+	printf("precision: [%s]\n", format.precision == NO_FLAG || NO_VALUE ? debug_type(format.precision) : ft_itoa(format.precision));
 	printf("type_flag: [%s] | [%i]\n", debug_type(format.type_flag), format.type_flag);
 	printf("type:      [%s] | [%i]\n", debug_type(format.type), format.type);
 	printf("i: [%i]\n", format.i);
