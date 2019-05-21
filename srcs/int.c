@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 13:54:33 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:13:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		add_signed(char *part, t_format format)
 	format.flags.zero =
 			format.precision != NO_FLAG ? 0 : format.flags.zero;
 	arg = convert_signed_arg(format);
-	if (!ft_atoi(arg))
+	if (!ft_atoi(arg) && format.precision != NO_FLAG)
 		arg[0] = 0;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_int_format(format, arg);
@@ -65,9 +65,8 @@ void		add_unsigned(char *part, t_format format)
 {
 	char	*arg;
 
-	format.precision = format.precision == NO_FLAG ? 0 : format.precision;
 	arg = convert_unsigned_arg(format);
-	if (!ft_atoi(arg))
+	if (!ft_atoi(arg) && format.precision != NO_FLAG)
 		arg[0] = 0;
 	if (format.precision % 10 == 0 && format.precision != 0)
 	{
@@ -96,7 +95,7 @@ void		add_base(char *part, t_format format)
 	else
 		arg = ft_lltoa_base(ft_atoll(arg),
 				format.type == BINARY ? 2 : 8, 0, format.flags.grid ? 1 : 0);
-	if (!ft_atoi_base(arg, 16) || !ft_atoi_base(arg, 8))
+	if ((!ft_atoi_base(arg, 16) || !ft_atoi_base(arg, 8)) && format.precision != NO_FLAG)
 		arg[0] = 0;
 	fill_int_format(format, arg);
 	free(arg);

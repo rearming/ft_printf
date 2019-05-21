@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 13:47:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:08:15 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ void		fill_int_format(t_format format, char *arg)
 	int			differ;
 	char		*temp;
 
-	//!arg ? raise_error(ERR_NULL_STR) : arg;
 	len = ft_strlen(arg);
-	temp = ft_strnew(len < format.precision ? format.precision : len);
-	ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
-	ft_memcpy(&temp[len < format.precision ? format.precision - len : 0], arg, len);
-	len = format.precision > len ? format.precision : len;
+	if (format.precision != NO_FLAG)
+	{
+		temp = ft_strnew(len < format.precision ? format.precision : len);
+		ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
+		ft_memcpy(&temp[len < format.precision ? format.precision - len : 0], arg, len);
+		len = format.precision > len ? format.precision : len;
+	}
+	else
+		temp = ft_strdup(arg);
 	differ = format.width > len ? format.width - len : 0;
 	if (format.flags.minus)
 	{
@@ -65,16 +69,15 @@ void		fill_text_format(t_format format, char *arg)
 	len = arg ? ft_strlen(arg) : 6;
 	if (format.type == STRING && format.precision != NO_FLAG && arg)
 	{
-
 		format.precision = format.precision == NO_VALUE ? 0 : format.precision;
 		len = format.precision < len ? format.precision : len;
 	}
 	differ = format.width > len ? format.width - len : 0;
 	arg = arg ? ft_strsub(arg, 0, len) : ft_strdup("(null)");
-	if (format.flags.minus)
+	if (format.flags.minus && arg)
 		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
 	fill_differ(differ, format);
-	if (!format.flags.minus)
+	if (!format.flags.minus && arg)
 		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
 	free(arg);
 }

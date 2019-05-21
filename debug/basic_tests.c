@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 19:30:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 13:51:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:11:52 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void		basic_tests(void)
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
-	ft_printf("@moulitest: %#.x %#.0x", 0, 0);
+	ft_printf("@moulitest: %#x %#0x", 0, 255);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: %#.x %#.0x", 0, 0);
+	printf("printf:    @moulitest: %#x %#0x", 0, 255);
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
@@ -59,7 +59,7 @@ void		basic_tests(void)
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
-	ft_printf("negative prec INT: %.0i %.u %03.1i", 0, 0, 36568);
+	ft_printf("negative prec: int : %0i unsg: %.u %03.1i", 0, 0, 36568);
 	ft_putchar('\n');
-	printf("printf:    negative prec INT: %.0i %.u %03.1i", 0, 0, 36568);
+	printf("printf:    negative prec: int : %0i unsg: %.u %03.1i", 0, 0, 36568);
 }
