@@ -371,7 +371,7 @@ int					get_next_line(const int fd, char **line);
 /*
 **	Same as atoi (str) but returns number in (base).
 */
-long long			ft_atoi_base(char *str, int base);
+long long			ft_atoll_base(char *str, int base);
 
 /*
 **	Returns count of digits in (nb).

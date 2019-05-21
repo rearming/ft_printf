@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 13:37:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:58:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_flags		get_flags(char *part, int *i)
 			flags.grid = 1;
 		(*i)++;
 	}
-	flags.minus ? flags.zero = 0 : flags.zero;
-	flags.plus ? flags.space = 0 : flags.space;
+	flags.zero = flags.minus ? 0 : flags.zero;
+	flags.space = flags.plus ? 0 : flags.space;
 	return (flags);
 }
 
@@ -76,6 +76,8 @@ int			get_precision(char *part, int *i)
 
 int			get_type_flag(char *part, int *i)
 {
+	if (part[(*i) + 1] == 'U' || part[(*i)] == 'U')
+		return (LONG);
 	if (part[*i] == 'l')
 	{
 		if (part[++(*i)] == 'l')
@@ -92,6 +94,10 @@ int			get_type_flag(char *part, int *i)
 	}
 	if (part[*i] == 'L')
 		return (LDOUBLE);
+	if (part[*i] == 'z')
+		return (LONG);
+	if (part[*i] == 'j')
+		return (INT_MAX);
 	if (get_type(part, i) != BREAK)
 		return (NO_FLAG);
 	else
@@ -108,7 +114,8 @@ int			get_type(char *part, int *i)
 		return (PTR);
 	if (part[*i] == 'd' || part[*i] == 'D' || part[*i] == 'i')
 		return (INT);
-	if (part[*i] == 'u' || part[*i] == 'U')
+	if (part[*i] == 'u'|| part[*i] == 'U'
+		|| part[(*i) - 1] == 'z')
 		return (UNSIGNED);
 	if (part[*i] == 'o')
 		return (OCTAL);
@@ -143,7 +150,7 @@ t_format	get_format(char *part)
 	format.precision = get_precision(part, &format.i);
 	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
 		return (format);
-	if (format.type_flag != NO_FLAG)
+	if (format.type_flag != NO_FLAG && part[format.i] != 'U')
 		format.i++;
 	if ((format.type = get_type(part, &format.i)) != BREAK)
 		format.i++;

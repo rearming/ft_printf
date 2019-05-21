@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 14:13:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:53:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char		*convert_signed_arg(t_format format)
 		return (ft_lltoa(va_arg(g_printf.ap, int)));
 	if (format.type_flag == CHAR)
 		return (ft_lltoa((char)va_arg(g_printf.ap, int)));
+	if (format.type_flag == INT_MAX)
+		return (ft_lltoa(va_arg(g_printf.ap, intmax_t)));
 	if (format.type_flag == SHORT)
 		return (ft_lltoa((short)va_arg(g_printf.ap, int)));
 	if (format.type_flag == LONG)
@@ -33,12 +35,14 @@ char		*convert_unsigned_arg(t_format format)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long long)));
 	if (format.type_flag == NO_FLAG)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned)));
+	if (format.type_flag == INT_MAX)
+		return (ft_ulltoa(va_arg(g_printf.ap, intmax_t)));
+	if (format.type_flag == LONG)
+		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long)));
 	if (format.type_flag == CHAR)
 		return (ft_ulltoa((unsigned char)va_arg(g_printf.ap, unsigned)));
 	if (format.type_flag == SHORT)
 		return (ft_ulltoa((unsigned short)va_arg(g_printf.ap, unsigned)));
-	if (format.type_flag == LONG)
-		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long)));
 	if (format.type_flag == LONG_LONG || format.type_flag == LDOUBLE)
 		return (ft_ulltoa(va_arg(g_printf.ap, unsigned long long)));
 	return (NULL);
@@ -90,12 +94,13 @@ void		add_base(char *part, t_format format)
 	format.flags.plus = 0;
 	arg = convert_unsigned_arg(format);
 	if (format.type == B_HEX || format.type == S_HEX || format.type == PTR)
-		arg = ft_lltoa_base(ft_atoll(arg), 16, format.type == B_HEX ? 1 : 0,
+		arg = ft_ulltoa_base(ft_atoull(arg), 16, format.type == B_HEX ? 1 : 0,
 				format.flags.grid || format.type == PTR ? 1 : 0);
 	else
-		arg = ft_lltoa_base(ft_atoll(arg),
+		arg = ft_ulltoa_base(ft_atoll(arg),
 				format.type == BINARY ? 2 : 8, 0, format.flags.grid ? 1 : 0);
-	if ((!ft_atoi_base(arg, 16) || !ft_atoi_base(arg, 8)) && format.precision != NO_FLAG)
+	if ((!ft_atoll_base(arg, 16)) && format.precision != NO_FLAG
+		&& (format.type != OCTAL || !format.flags.grid))
 		arg[0] = 0;
 	fill_int_format(format, arg);
 	free(arg);

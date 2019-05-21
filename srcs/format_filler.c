@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 14:08:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:14:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		fill_int_format(t_format format, char *arg)
 	{
 		if (format.flags.plus)
 			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		if (format.flags.space && ft_isdigit(arg[0]))
+			ft_lstaddback(&g_printf.lst_buf, " ", 2);
 		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
 	}
 	fill_differ(differ, format);
@@ -56,6 +58,8 @@ void		fill_int_format(t_format format, char *arg)
 	{
 		if (format.flags.plus)
 			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+		if (format.flags.space && ft_isdigit(arg[0]))
+			ft_lstaddback(&g_printf.lst_buf, " ", 2);
 		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
 	}
 	free(temp);
@@ -67,13 +71,18 @@ void		fill_text_format(t_format format, char *arg)
 	int			differ;
 
 	len = arg ? ft_strlen(arg) : 6;
+	if (arg && !arg[0] && format.type == CHAR)
+		len = 1;
 	if (format.type == STRING && format.precision != NO_FLAG && arg)
 	{
 		format.precision = format.precision == NO_VALUE ? 0 : format.precision;
 		len = format.precision < len ? format.precision : len;
 	}
 	differ = format.width > len ? format.width - len : 0;
-	arg = arg ? ft_strsub(arg, 0, len) : ft_strdup("(null)");
+	if (arg && !arg[0])
+		arg = ft_strdup("\0");
+	else
+		arg = arg ? ft_strsub(arg, 0, len) : ft_strdup("(null)");
 	if (format.flags.minus && arg)
 		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
 	fill_differ(differ, format);

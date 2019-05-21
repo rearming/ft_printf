@@ -20,6 +20,8 @@ char 		*debug_type(int code)
 	{
 		case BREAK:
 			return ("BREAK");
+		case INT_MAX:
+			return ("INT_MAX");
 		case CHAR:
 			return ("CHAR");
 		case UCHAR:

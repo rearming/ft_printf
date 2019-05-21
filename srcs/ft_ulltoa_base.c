@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_ulltoa_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/18 19:22:51 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/20 20:18:51 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/21 16:02:18 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/21 16:16:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char		*alloc_formatted(long long nbr, int base, char capital, char format)
+static char		*alloc_formatted(unsigned long long nbr, int base, char capital, char format)
 {
 	int		size;
 	char	*res;
 
 	format = base > 10 || base == 8 ? format : 0;
-	size = nbr < 0 ? 1 : 0;
+	size = 0;
 	if (base != 8)
 		size += format ? 2 : 0;
 	else
 		size += format ? 1 : 0;
-	while (nbr >= base || nbr <= -base)
+	while (nbr >= (unsigned)base)
 	{
 		nbr /= base;
 		size++;
@@ -31,7 +31,6 @@ static char		*alloc_formatted(long long nbr, int base, char capital, char format
 	size++;
 	res = ft_strnew(size);
 	ft_memset(res, '*', size);
-	res[0] = nbr < 0 ? '-' : '+';
 	if (format && nbr)
 	{
 		res[res[0] == '-' ? 1 : 0] = '0';
@@ -41,7 +40,7 @@ static char		*alloc_formatted(long long nbr, int base, char capital, char format
 	return (res);
 }
 
-char			*ft_lltoa_base(long long nbr, int base, char capital, char format)
+char			*ft_ulltoa_base(unsigned long long nbr, int base, char capital, char format)
 {
 	char		*res;
 	size_t		len;
@@ -49,14 +48,13 @@ char			*ft_lltoa_base(long long nbr, int base, char capital, char format)
 	size_t		limit;
 
 	c = capital ? 'A' : 'a';
-	limit = nbr < 0 ? 1 : 0;
+	limit = 0;
 	format = nbr ? format : 0;
 	if (base > 10)
 		limit += format ? 2 : 0;
 	if (base == 8)
 		limit += format ? 1 : 0;
 	res = alloc_formatted(nbr, base, capital, format);
-	nbr *= nbr < 0 ? -1 : 1;
 	len = ft_strlen(res);
 	while (len-- > limit)
 	{

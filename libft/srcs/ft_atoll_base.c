@@ -31,7 +31,7 @@ static int		skip_obs(char *str, int *is_neg)
 	return (i);
 }
 
-long long		ft_atoi_base(char *str, int base)
+long long		ft_atoll_base(char *str, int base)
 {
 	int			i;
 	int			is_neg;

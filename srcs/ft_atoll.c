@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 20:28:25 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/18 20:28:25 by rearming         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:07:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 long long	ft_atoll(char *str)
 {
-	return (ft_atoi_base(str, 10));
+	return (ft_atoll_base(str, 10));
 }
