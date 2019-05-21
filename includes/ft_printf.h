@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 16:03:27 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:03:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void					print_format(t_format format);
 char 					*debug_type(int code);
 void					my_tests(void);
 void					basic_tests(void);
+void					int_prec_tests(void);
 
 /*
 ** error functions

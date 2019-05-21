@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 17:14:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:32:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,28 @@ void		fill_differ(int differ, t_format format)
 	}
 }
 
+int 		add_signs(char **arg, t_format format)
+{
+	char	*temp;
+	int 	len;
+
+	if (!arg)
+		return (0);
+	len = ft_strlen(*arg);
+	if (format.flags.plus)
+		ft_isdigit(arg[0][0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+	if (!ft_isdigit(arg[0][0]))
+		ft_lstaddback(&g_printf.lst_buf, "-", 2);
+	if (!ft_isdigit(arg[0][0]))
+	{
+		temp = (char*)malloc(sizeof(char) * (len + 1));
+		ft_memcpy(&temp[0], &arg[0][1], len + 1);
+		arg[0] = temp;
+		return (1);
+	}
+	return (0);
+}
+
 void		fill_int_format(t_format format, char *arg)
 {
 	int			len;
@@ -38,30 +60,22 @@ void		fill_int_format(t_format format, char *arg)
 	if (format.precision != NO_FLAG)
 	{
 		temp = ft_strnew(len < format.precision ? format.precision : len);
-		ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
 		ft_memcpy(&temp[len < format.precision ? format.precision - len : 0], arg, len);
+		ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
 		len = format.precision > len ? format.precision : len;
 	}
 	else
 		temp = ft_strdup(arg);
 	differ = format.width > len ? format.width - len : 0;
-	if (format.flags.minus)
-	{
-		if (format.flags.plus)
-			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
-		if (format.flags.space && ft_isdigit(arg[0]))
-			ft_lstaddback(&g_printf.lst_buf, " ", 2);
-		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
-	}
-	fill_differ(differ, format);
 	if (!format.flags.minus)
-	{
-		if (format.flags.plus)
-			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
-		if (format.flags.space && ft_isdigit(arg[0]))
-			ft_lstaddback(&g_printf.lst_buf, " ", 2);
-		ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
-	}
+		fill_differ(differ, format);
+	if (format.flags.space && (ft_isdigit(arg[0])))
+		ft_lstaddback(&g_printf.lst_buf, " ", 2);
+	if (format.flags.plus)
+		ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+	ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
+	if (format.flags.minus)
+		fill_differ(differ, format);
 	free(temp);
 }
 

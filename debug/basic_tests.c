@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 19:30:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 17:47:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:17:01 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		basic_tests(void)
 {
-	printf("\n--------------------------------\n");
+	/*printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
 	ft_printf("%s %s %s %s string. gg!", "this", "is", "a", "multi");
 	ft_putchar('\n');
@@ -25,15 +25,15 @@ void		basic_tests(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("@moulitest: %c zeza", 0);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: %c zeza", 0);
+	printf("printf:    @moulitest: %c zeza", 0);*/
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
-	ft_printf("@moulitest: % .1i %#.1x", 0, 0);
+	ft_printf("@int and hex: % .1i %#.1x", 0, 0);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: % .1i %#.1x", 0, 0);
+	printf("printf:    @int and hex: % .1i %#.1x", 0, 0);
 
-	printf("\n--------------------------------\n");
+	/*printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
 	ft_printf("%s %s", NULL, "string");
 	ft_putchar('\n');
@@ -85,7 +85,7 @@ void		basic_tests(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("@moulitest: %#o %#o", 0, 0);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: %#o %#o", 0, 0);
+	printf("printf:    @moulitest: %#o %#o", 0, 0);*/
 
 	/*printf("\nTESTS\n");
 	ft_printf("%.2147483648d\n", 1); // int max + 1

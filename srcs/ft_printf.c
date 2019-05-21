@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 16:59:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:19:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		add_buf_node(char *part)
 	t_format	format;
 
 	format = get_format(part);
-	//print_format(format);
 	if (format.type_flag == BREAK || format.type == BREAK)
 		add_text(part, format);
 	if (format.type == CHAR)

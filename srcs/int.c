@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 17:53:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:32:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		add_signed(char *part, t_format format)
 
 	format.flags.zero =
 			format.precision != NO_FLAG ? 0 : format.flags.zero;
+	format.precision = format.precision == NO_VALUE ? 0 : format.precision;
 	arg = convert_signed_arg(format);
-	if (!ft_atoi(arg) && format.precision != NO_FLAG)
+	if (!ft_atoi(arg) && format.precision != NO_FLAG && format.precision == 0)
 		arg[0] = 0;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_int_format(format, arg);
