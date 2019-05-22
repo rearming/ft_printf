@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 17:34:51 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 20:40:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int			get_type_flag(char *part, int *i)
 {
 	if (part[(*i) + 1] == 'U' || part[(*i)] == 'U')
 		return (LONG);
+	if (part[(*i) + 1] == 'O' || part[(*i)] == 'O')
+		return (LONG);
 	if (part[*i] == 'l')
 	{
 		if (part[++(*i)] == 'l')
@@ -95,7 +97,7 @@ int			get_type_flag(char *part, int *i)
 	if (part[*i] == 'L')
 		return (LDOUBLE);
 	if (part[*i] == 'z')
-		return (LONG);
+		return (LONG_LONG);
 	if (part[*i] == 'j')
 		return (INT_MAX);
 	if (get_type(part, *i) != BREAK)
@@ -110,14 +112,13 @@ int			get_type(char *part, int i)
 		return (CHAR);
 	if (part[i] == 'C')
 		return (WCHAR);
-	if (part[i] == 's')
+	if (part[i] == 's' || part[i] == 'S')
 		return (STRING);
 	if (part[i] == 'p')
 		return (PTR);
 	if (part[i] == 'd' || part[i] == 'D' || part[i] == 'i')
 		return (INT);
-	if (part[i] == 'u'|| part[i] == 'U'
-		|| part[(i) - 1] == 'z')
+	if (part[i] == 'u'|| part[i] == 'U')
 		return (UNSIGNED);
 	if (part[i] == 'o' || part[i] == 'O')
 		return (OCTAL);
@@ -152,7 +153,9 @@ t_format	get_format(char *part)
 	format.precision = get_precision(part, &format.i);
 	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
 		return (format);
-	if (format.type_flag != NO_FLAG && part[format.i] != 'U')
+	if (format.type_flag != NO_FLAG
+		&& part[format.i] != 'U' && part[format.i] != 'O')
+		//todo don't forget about this kostil'
 		format.i++;
 	if ((format.type = get_type(part, format.i)) != BREAK)
 		format.i++;

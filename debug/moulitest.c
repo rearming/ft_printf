@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:43:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 19:57:18 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 20:30:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void		moulitest(void)
 	printf("\t\tOCTAL LONG_MAX:\n\n");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("%O\n", LONG_MAX);
+	ft_printf("%O", LONG_MAX);
 	ft_putchar('\n');
-	printf("printf:    %O\n", LONG_MAX);
+	printf("printf:    %O", LONG_MAX);
 
 	printf("\n--------------------------------\n");
 	printf("\t\tSpace with int:\n\n");

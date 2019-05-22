@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 19:31:52 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 20:34:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void		add_unsigned(char *part, t_format format)
 		format.flags.zero = 1;
 		format.width = format.precision;
 	}
-	//format.precision = ft_strlen(arg);
 	fill_format(format, arg);
 	free(arg);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
@@ -97,7 +96,7 @@ void		add_base(char *part, t_format format)
 	if (format.type == B_HEX || format.type == S_HEX || format.type == PTR)
 		arg = ft_ulltoa_base(ft_atoull(arg), 16, format.type == B_HEX ? 1 : 0, 0);
 	else
-		arg = ft_ulltoa_base(ft_atoll(arg),
+		arg = ft_ulltoa_base(ft_atoull(arg),
 				format.type == BINARY ? 2 : 8, 0, 0);
 	if ((!ft_atoll_base(arg, 16)) && format.precision != NO_FLAG
 		&& (format.type != OCTAL || !format.flags.grid) && format.type != PTR)
