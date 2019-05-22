@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 19:30:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 12:12:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:44:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		basic_tests(void)
 {
-	/*printf("\n--------------------------------\n");
+	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
 	ft_printf("%s %s %s %s string. gg!", "this", "is", "a", "multi");
 	ft_putchar('\n');
@@ -25,7 +25,7 @@ void		basic_tests(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("@moulitest: %c zeza", 0);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: %c zeza", 0);*/
+	printf("printf:    @moulitest: %c zeza", 0);
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
@@ -39,7 +39,12 @@ void		basic_tests(void)
 	ft_putchar('\n');
 	printf("printf:    %jd", -9223372036854775808);
 
-	/*printf("\n--------------------------------\n");
+	printf("\n--------------------------------\n");
+	write(1, "ft_printf: ", 11);
+	ft_printf("%c", L'✅');
+	ft_putchar('\n');
+	printf("printf:    %c", L'✅');
+	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
 	ft_printf("%s %s", NULL, "string");
 	ft_putchar('\n');
@@ -91,10 +96,10 @@ void		basic_tests(void)
 	write(1, "ft_printf: ", 11);
 	ft_printf("@moulitest: %#o %#o", 0, 0);
 	ft_putchar('\n');
-	printf("printf:    @moulitest: %#o %#o", 0, 0);*/
+	printf("printf:    @moulitest: %#o %#o", 0, 0);
 
-	/*printf("\nTESTS\n");
+	printf("\nTESTS\n");
 	ft_printf("%.2147483648d\n", 1); // int max + 1
 	ft_printf("%.9223372036854775807d\n", 1); // long max + 1
-	ft_printf("%.18446744073709551616d\n", 1); // ulong max + 1*/
+	ft_printf("%.18446744073709551616d\n", 1); // ulong max + 1
 }

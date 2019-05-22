@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 20:20:19 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:34:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,40 +98,42 @@ int			get_type_flag(char *part, int *i)
 		return (LONG);
 	if (part[*i] == 'j')
 		return (INT_MAX);
-	if (get_type(part, i) != BREAK)
+	if (get_type(part, *i) != BREAK)
 		return (NO_FLAG);
 	else
 		return (BREAK);
 }
 
-int			get_type(char *part, int *i)
+int			get_type(char *part, int i)
 {
-	if (part[*i] == 'c' || part[*i] == 'C')
+	if (part[i] == 'c' || part[i] == 'C')
 		return (CHAR);
-	if (part[*i] == 's' || part[*i] == 'S')
+	if (part[i] == 'C')
+		return (WCHAR);
+	if (part[i] == 's')
 		return (STRING);
-	if (part[*i] == 'p')
+	if (part[i] == 'p')
 		return (PTR);
-	if (part[*i] == 'd' || part[*i] == 'D' || part[*i] == 'i')
+	if (part[i] == 'd' || part[i] == 'D' || part[i] == 'i')
 		return (INT);
-	if (part[*i] == 'u'|| part[*i] == 'U'
-		|| part[(*i) - 1] == 'z')
+	if (part[i] == 'u'|| part[i] == 'U'
+		|| part[(i) - 1] == 'z')
 		return (UNSIGNED);
-	if (part[*i] == 'o')
+	if (part[i] == 'o' || part[i] == 'O')
 		return (OCTAL);
-	if (part[*i] == 'x')
+	if (part[i] == 'x')
 		return (S_HEX);
-	if (part[*i] == 'X')
+	if (part[i] == 'X')
 		return (B_HEX);
-	if (part[*i] == 'f' || part[*i] == 'F')
+	if (part[i] == 'f' || part[i] == 'F')
 		return (DOUBLE);
-	if (part[*i] == 'b')
+	if (part[i] == 'b')
 		return (BINARY);
-	if (part[*i] == 'r')
+	if (part[i] == 'r')
 		return (NON_PRINT);
-	if (part[*i] == '%')
+	if (part[i] == '%')
 		return (PERCENT);
-	return (part[*i] == 'k' ? DATE : BREAK);
+	return (part[i] == 'k' ? DATE : BREAK);
 }
 
 t_format	get_format(char *part)
@@ -152,7 +154,7 @@ t_format	get_format(char *part)
 		return (format);
 	if (format.type_flag != NO_FLAG && part[format.i] != 'U')
 		format.i++;
-	if ((format.type = get_type(part, &format.i)) != BREAK)
+	if ((format.type = get_type(part, format.i)) != BREAK)
 		format.i++;
 	return (format);
 }

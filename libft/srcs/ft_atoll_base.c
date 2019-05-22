@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:19:09 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/22 11:56:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 19:21:25 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ long long		ft_atoll_base(char *str, int base)
 	if (base > 16 || base < 2)
 		return (0);
 	digits = ft_count_digits_base(&str[i], base) - 1;
-	while (ft_isdigit(str[i]) || (str[i] >= 'A' && str[i] <= 'A' + base - 11))
+	while (ft_isdigit(str[i]) || (str[i] >= 'A' && str[i] <= 'A' + base - 11)
+								|| (str[i] >= 'a' && str[i] <= 'a' + base - 11))
 	{
 		if (ft_isdigit(str[i]) && str[i] > '0' + base)
 			return (res * is_neg);

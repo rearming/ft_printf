@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 16:03:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:34:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <wchar.h>
 
 # include "libft.h"
 # include "structs.h"
@@ -48,7 +49,7 @@ t_flags					get_flags(char *part, int *i);
 int						get_width(char *part, int *i);
 int						get_precision(char *part, int *i);
 int						get_type_flag(char *part, int *i);
-int						get_type(char *part, int *i);
+int						get_type(char *part, int i);
 t_format				get_format(char *part);
 
 /*
@@ -89,6 +90,7 @@ char 					*debug_type(int code);
 void					my_tests(void);
 void					basic_tests(void);
 void					int_prec_tests(void);
+void					moulitest(void);
 
 /*
 ** error functions
@@ -108,5 +110,11 @@ char					**split_flags(const char *str, char delim);
 
 char					*check_fields(t_ld *ld);
 void					add_double(char *part, t_format format);
+
+/*
+**	list functions
+*/
+
+char					*get_last_node(t_list *list);
 
 #endif

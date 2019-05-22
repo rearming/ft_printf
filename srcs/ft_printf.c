@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 20:19:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:41:06 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void		add_buf_node(char *part)
 int 		ft_printf(const char *format, ...)
 {
 	int			i;
+	//char		*perc_str;
 	char 		**parts;
 	int 		ret_val;
 
@@ -90,7 +91,16 @@ int 		ft_printf(const char *format, ...)
 	i = 0;
 	while (parts[i])
 	{
-		add_buf_node(parts[i]);
+		/*if (parts[i][0] == '%' && parts[i + 1] && parts[i + 1] == '%')
+		{
+			perc_str = ft_strjoin(parts[i], parts[i + 1]);
+			add_buf_node(perc_str);
+			free(parts[i]);
+			free(parts[i + 1]);
+			i++;
+		}
+		else*/
+			add_buf_node(parts[i]);
 		i++;
 	}
 	va_end(g_printf.ap);

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:07:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 09:12:46 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:33:44 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define DATE 30
 # define NON_PRINT 31
 # define PERCENT 32
-
-# define NOTHING 33
+# define WCHAR 33
+# define WSTRING 34
 
 # define NO_FLAG -1
 # define NO_VALUE -2
