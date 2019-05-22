@@ -103,17 +103,6 @@ void					raise_error(int err_code);
 char					**split_flags(const char *str, char delim);
 
 /*
-** itoa and atoi's
-*/
-
-char					*ft_lltoa(long long n);
-char					*ft_ulltoa(unsigned long long int n);
-char					*ft_lltoa_base(long long nbr, int base, char capital, char format);
-long long				ft_atoll(char *str);
-unsigned long long 		ft_atoull(const char *str);
-char					*ft_ulltoa_base(unsigned long long nbr, int base, char capital, char format);
-
-/*
 **	float, double & long double
 */
 

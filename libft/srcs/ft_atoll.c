@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 17:39:48 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/22 11:56:22 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/18 20:28:25 by rearming          #+#    #+#             */
+/*   Updated: 2019/05/22 11:56:40 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strdup(const char *src)
+long long	ft_atoll(char *str)
 {
-	char		*dst;
-	size_t		len;
-
-	if (!src)
-		return (NULL);
-	len = ft_strlen(src) + 1;
-	if (!(dst = (char*)malloc(sizeof(char) * len)))
-		return (NULL);
-	dst = (char*)ft_memcpy(dst, src, len);
-	return (dst);
+	if (!str)
+		return (0);
+	return (ft_atoll_base(str, 10));
 }

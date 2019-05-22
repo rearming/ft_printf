@@ -15,21 +15,15 @@ DIR_O = temp
 SOURCES =					\
 		error.c				\
 		format_filler.c		\
-		format_parser.c	\
-		ft_atoll.c		\
-		ft_lltoa.c		\
-		ft_lltoa_base.c	\
-		ft_u_putstr_fd.c\
-		int.c			\
-		ft_printf.c		\
-		split_flags.c	\
-		string.c		\
+		format_parser.c		\
+		ft_u_putstr_fd.c	\
+		int.c				\
+		ft_printf.c			\
+		split_flags.c		\
+		string.c			\
 		int.c				\
 		floats.c			\
 		fields_check.c		\
-		ft_atoull.c			\
-		ft_ulltoa.c			\
-		ft_ulltoa_base.c	\
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

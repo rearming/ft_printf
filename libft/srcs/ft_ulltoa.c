@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_ulltoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/18 20:28:25 by rearming          #+#    #+#             */
-/*   Updated: 2019/05/21 16:07:48 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/21 16:07:51 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/22 11:56:40 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-long long	ft_atoll(char *str)
+char				*ft_ulltoa(unsigned long long int n)
 {
-	return (ft_atoll_base(str, 10));
+	return (ft_ulltoa_base(n, 10, 0, 0));
 }

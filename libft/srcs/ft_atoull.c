@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ulltoa.c                                        :+:      :+:    :+:   */
+/*   ft_atoull.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 16:07:51 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 16:07:51 by sleonard         ###   ########.fr       */
+/*   Created: 2019/05/21 16:06:56 by sleonard          #+#    #+#             */
+/*   Updated: 2019/05/22 11:56:40 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char				*ft_ulltoa(unsigned long long int n)
+static size_t			pass_spaces(const char *str)
+{
+	size_t	pos;
+
+	if (!str)
+		return (0);
+	pos = 0;
+	while ((str[pos] > 8 && str[pos] < 14) || str[pos] == 32)
+		pos++;
+	return (pos);
+}
+
+unsigned long long 		ft_atoull(const char *str)
 {
 	unsigned long long	num;
-	int					qt;
-	char				*res;
+	size_t				pos;
 
-	qt = 1;
-	num = n;
-	while (n / 10)
+	if (!str)
+		return (0);
+	num = 0;
+	pos = pass_spaces(str);
+	while (ft_isdigit(str[pos]))
 	{
-		n = n / 10;
-		qt++;
+		num = num * 10 + str[pos] - '0';
+		pos++;
 	}
-	if (!(res = ft_strnew(qt)))
-		return (NULL);
-	while (qt-- >= 1)
-	{
-		res[qt] = num % 10 + '0';
-		num = num / 10;
-	}
-	return (res);
+	return ((num));
 }

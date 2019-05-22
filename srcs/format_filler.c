@@ -50,6 +50,35 @@ int 		add_signs(char **arg, t_format format)
 	return (0);
 }
 
+void		fill_base_format(t_format format, char *arg)
+{
+	int			len;
+	int			differ;
+	char		*temp;
+
+	len = ft_strlen(arg);
+	if (format.precision != NO_FLAG)
+	{
+		temp = ft_strnew(len < format.precision ? format.precision : len);
+		ft_memcpy(&temp[len < format.precision ? format.precision - len : 0], arg, len);
+		ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
+		len = format.precision > len ? format.precision : len;
+	}
+	else
+		temp = ft_strdup(arg);
+	differ = format.width > len ? format.width - len : 0;
+	if (!format.flags.minus)
+		fill_differ(differ, format);
+	if (format.flags.space && (ft_isdigit(arg[0])))
+		ft_lstaddback(&g_printf.lst_buf, " ", 2);
+	if (format.flags.plus)
+		ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
+	ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
+	if (format.flags.minus)
+		fill_differ(differ, format);
+	free(temp);
+}
+
 void		fill_int_format(t_format format, char *arg)
 {
 	int			len;

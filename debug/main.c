@@ -15,7 +15,7 @@
 int 	main(void)
 {
 	basic_tests();
-	my_tests();
-	int_prec_tests();
+	//my_tests();
+	//int_prec_tests();
 	return (0);
 }

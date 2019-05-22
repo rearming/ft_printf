@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 17:40:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:02:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,6 +397,39 @@ void				ft_lstaddback(t_list **list, void *content, size_t content_size);
 **	Converts (n) unsigned long to a string. Returns a pointer to the new string.
 */
 char				*ft_ultoa(unsigned long n);
+
+/*
+**	Converts (n) long to a string. Returns a pointer to the new string.
+*/
+char				*ft_lltoa(long long n);
+
+/*
+**	Same as ft_lltoa, but works with unsigned long long.
+*/
+char				*ft_ulltoa(unsigned long long n);
+
+/*
+**	Converts (n) long long to a string in selected base. Returns a pointer to the new string.
+**	Set value "capital" to 1 to get result with capital charachers (FF), to zero (ff)
+**	Set value "format" to 1 to get base specifier (0 prefix for octal), (0x for hex)
+*/
+char				*ft_lltoa_base(long long nbr, int base, char capital, char format);
+
+/*
+**	Same as atoi (str) but working with long long integers
+*/
+long long			ft_atoll(char *str);
+
+/*
+**	Same as atoi (str) but working with unsigned long long integers
+*/
+unsigned long long 	ft_atoull(const char *str);
+
+/*
+**	Same as lltoa_base (str) but working with unsigned long long integers
+*/
+char				*ft_ulltoa_base(unsigned long long nbr,
+								int base, char capital, char format);
 
 /*
 **	Returns absolute value of int (num).

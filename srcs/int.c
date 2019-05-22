@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 20:32:07 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:14:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ char		*convert_signed_arg(t_format format)
 	if (format.type_flag == CHAR)
 		return (ft_lltoa((char)va_arg(g_printf.ap, int)));
 	if (format.type_flag == INT_MAX)
-		return (ft_lltoa(va_arg(g_printf.ap, intmax_t)));
+	{
+		char *str;
+
+		str = ft_ulltoa(va_arg(g_printf.ap, intmax_t));
+		printf("str: [%s]\n", str);
+		return (str);
+	}
 	if (format.type_flag == SHORT)
 		return (ft_lltoa((short)va_arg(g_printf.ap, int)));
 	if (format.type_flag == LONG)
@@ -103,7 +109,7 @@ void		add_base(char *part, t_format format)
 	if ((!ft_atoll_base(arg, 16)) && format.precision != NO_FLAG
 		&& (format.type != OCTAL || !format.flags.grid))
 		arg[0] = 0;
-	fill_int_format(format, arg);
+	fill_base_format(format, arg);
 	free(arg);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);

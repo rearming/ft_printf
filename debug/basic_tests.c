@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 19:30:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/21 20:17:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:12:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ void		basic_tests(void)
 
 	printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
-	ft_printf("@int and hex: % .1i %#.1x", 0, 0);
+	ft_printf("%lld", -9223372036854775808);
 	ft_putchar('\n');
-	printf("printf:    @int and hex: % .1i %#.1x", 0, 0);
+	printf("printf:    %lld", -9223372036854775808);
+
+	printf("\n--------------------------------\n");
+	write(1, "ft_printf: ", 11);
+	ft_printf("%jd", -9223372036854775808);
+	ft_putchar('\n');
+	printf("printf:    %jd", -9223372036854775808);
 
 	/*printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
