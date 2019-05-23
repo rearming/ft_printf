@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:43:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 20:30:18 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:31:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void		moulitest(void)
 {
-	printf("\n--------------------------------\n");
+	/*printf("\n--------------------------------\n");
 	write(1, "ft_printf: ", 11);
 	ft_printf("{%5%}");
 	ft_putchar('\n');
@@ -45,13 +45,20 @@ void		moulitest(void)
 	ft_printf("%O", LONG_MAX);
 	ft_putchar('\n');
 	printf("printf:    %O", LONG_MAX);
-
+*/
 	printf("\n--------------------------------\n");
-	printf("\t\tSpace with int:\n\n");
+	printf("\t\tOctal prec no value and grid:\n\n");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("% 10i\n", 42);
+	ft_printf("@moulitest: %o %#.0o", 0, 0);
 	ft_putchar('\n');
-	printf("printf:    % 10i\n", 42);
+	printf("printf:    @moulitest: %o %#.0o", 0, 0);
 
+	printf("\n--------------------------------\n");
+	printf("\t\tPTR:\n\n");
+
+	write(1, "ft_printf: ", 11);
+	ft_printf("%.0p, %.p", 0, 0);
+	ft_putchar('\n');
+	printf("printf:    %.0p, %.p", 0, 0);
 }

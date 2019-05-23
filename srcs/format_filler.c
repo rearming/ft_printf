@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 19:55:17 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/22 19:57:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void		fill_int_format(t_format format, char *arg)
 	if (format.flags.minus)
 		fill_differ(differ, format);
 	free(temp);
+	free(prefix);
 }
 
 void		fill_text_format(t_format format, char *arg)

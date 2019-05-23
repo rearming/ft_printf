@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 20:39:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:45:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ char 		*get_buffer(t_list **list, size_t total_len)
 
 int			print_list(t_list **list, int fd)
 {
-	size_t 	total_len;
-	t_list	*tmp_count;
+	size_t 		total_len;
+	t_list		*tmp_count;
+	char 		*buffer;
 
 	if (!list)
 		raise_error(ERR_NULL_LIST);
@@ -49,7 +50,9 @@ int			print_list(t_list **list, int fd)
 		total_len += tmp_count->content_size - 1;
 		tmp_count = tmp_count->next;
 	}
-	write(fd, get_buffer(&g_printf.lst_buf, total_len), total_len);
+	buffer = get_buffer(&g_printf.lst_buf, total_len);
+	write(fd, buffer, total_len);
+	free(buffer);
 	return (total_len);
 }
 
@@ -91,7 +94,7 @@ int 		ft_printf(const char *format, ...)
 	i = 0;
 	while (parts[i])
 	{
-		/*if (parts[i][0] == '%' && parts[i + 1] && parts[i + 1] == '%')
+		/*if (parts[i][0] == '%' && parts[i + 1] && parts[i + 1] == '%') //todo handle percent specifier
 		{
 			perc_str = ft_strjoin(parts[i], parts[i + 1]);
 			add_buf_node(perc_str);
@@ -105,5 +108,6 @@ int 		ft_printf(const char *format, ...)
 	}
 	va_end(g_printf.ap);
 	ret_val = print_list(&g_printf.lst_buf, 1);
+	free(parts);
 	return (ret_val);
 }

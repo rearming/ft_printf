@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 17:34:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:41:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void					my_tests(void);
 void					basic_tests(void);
 void					int_prec_tests(void);
 void					moulitest(void);
+void					leak_check(void);
+void					min_leak_check(void);
 
 /*
 ** error functions

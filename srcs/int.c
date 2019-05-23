@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 20:34:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:37:01 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,13 @@ void		add_unsigned(char *part, t_format format)
 void		add_base(char *part, t_format format)
 {
 	char	*arg;
+	char 	*temp;
 
 	format.flags.zero =
 			format.precision != NO_FLAG ? 0 : format.flags.zero;
 	format.flags.plus = 0;
 	arg = convert_unsigned_arg(format);
+	temp = arg;
 	if (format.type == B_HEX || format.type == S_HEX || format.type == PTR)
 		arg = ft_ulltoa_base(ft_atoull(arg), 16, format.type == B_HEX ? 1 : 0, 0);
 	else
@@ -101,8 +103,10 @@ void		add_base(char *part, t_format format)
 	if ((!ft_atoll_base(arg, 16)) && format.precision != NO_FLAG
 		&& (format.type != OCTAL || !format.flags.grid) && format.type != PTR)
 		arg[0] = 0;
+	arg[0] = format.type == PTR && (!format.precision || format.precision == NO_VALUE) ? 0 : arg[0];
 	fill_int_format(format, arg);
 	free(arg);
+	free(temp);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);

@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 19:05:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:40:54 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void			get_a(t_ld *ld, int sign,
 	if (precision != 0)
 	{
 		ld->str = ft_strcat(ld->str, ".");
-		ld->str = ft_strncat(ld->str, ft_ultoa(fract), (size_t) precision);
+		ld->str = ft_strncat(ld->str, ft_ultoa(fract), (size_t)precision);
 	}
 }
 
@@ -111,11 +111,10 @@ void				add_double(char *part, t_format format)
 			format.precision != NO_FLAG ? 0 : format.flags.zero;
 	arg = ftoa(get_doble_arg(format), format.precision);
 	format.precision = format.precision == NO_FLAG ? 0 : format.precision;
-	//printf("The arg now: [%s]\n", arg);
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_float_format(format, arg);
 	free(arg);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
-				  ft_strlen(&part[format.i]) + 1);
+			ft_strlen(&part[format.i]) + 1);
 	free(part);
 }
