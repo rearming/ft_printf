@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:35:47 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 11:37:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:22:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,6 @@ void		add_unsigned(char *part, t_format format)
 	arg = convert_unsigned_arg(format);
 	if (!ft_atoi(arg) && format.precision != NO_FLAG)
 		arg[0] = 0;
-	if (format.precision % 10 == 0 && format.precision != 0)
-	{
-		format.flags.zero = 1;
-		format.width = format.precision;
-	}
 	fill_format(format, arg);
 	free(arg);
 	ft_lstaddback(&g_printf.lst_buf, &part[format.i],

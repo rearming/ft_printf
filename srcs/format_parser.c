@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 20:40:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:24:56 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			get_type_flag(char *part, int *i)
 
 int			get_type(char *part, int i)
 {
+	//printf("Yolo part get_type: [%c]\n", part[i - 1]);
 	if (part[i] == 'c' || part[i] == 'C')
 		return (CHAR);
 	if (part[i] == 'C')
@@ -133,7 +134,9 @@ int			get_type(char *part, int i)
 	if (part[i] == 'r')
 		return (NON_PRINT);
 	if (part[i] == '%')
+	{
 		return (PERCENT);
+	}
 	return (part[i] == 'k' ? DATE : BREAK);
 }
 
@@ -150,12 +153,16 @@ t_format	get_format(char *part)
 		format.i++;
 	format.flags = get_flags(part, &format.i);
 	format.width = get_width(part, &format.i);
+	if (format.width < 0 && format.width != NO_FLAG && format.width != NO_VALUE)
+	{
+		format.width *= -1;
+		format.flags.minus = 1;
+	}
 	format.precision = get_precision(part, &format.i);
 	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
 		return (format);
 	if (format.type_flag != NO_FLAG
 		&& part[format.i] != 'U' && part[format.i] != 'O')
-		//todo don't forget about this kostil'
 		format.i++;
 	if ((format.type = get_type(part, format.i)) != BREAK)
 		format.i++;

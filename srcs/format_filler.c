@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:20:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/22 19:57:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:04:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		fill_differ(int differ, t_format format)
 	}
 }
 
-char		*add_prefix(char *arg, t_format *format)
+char		*get_prefix(char *arg, t_format *format)
 {
 	if (!arg)
 		return (0);
@@ -66,13 +66,16 @@ char		*add_prefix(char *arg, t_format *format)
 	return (0);
 }
 
-char		*add_base_prefix(char *arg, t_format *format)
+char		*get_base_prefix(char *arg, t_format *format)
 {
 	if (!arg)
 		return (0);
 	if ((format->flags.grid && ft_atoll_base(arg, 16)) || format->type == PTR)
 	{
-		format->width -= format->type == OCTAL ? 1 : 2;
+		if ((format->width != NO_VALUE && format->width != NO_FLAG) || format->type == PTR)
+			format->width -= format->type == OCTAL ? 1 : 2;
+		else
+			format->precision -= format->type == OCTAL ? 1 : 2;
 		if (format->type == S_HEX || format->type == PTR)
 			return (ft_strdup("0x"));
 		if (format->type == B_HEX)
@@ -83,29 +86,8 @@ char		*add_base_prefix(char *arg, t_format *format)
 	return (0);
 }
 
-void		fill_int_format(t_format format, char *arg)
+void		add_prefix(t_format format, int differ, char *prefix, int len)
 {
-	int			len;
-	int			differ;
-	char		*temp;
-	char		*prefix;
-
-	if (format.type != OCTAL && format.type != B_HEX
-			&& format.type != S_HEX && format.type != PTR)
-		prefix = add_prefix(arg, &format);
-	else
-		prefix = add_base_prefix(arg, &format);
-	len = ft_strlen(arg);
-	if (format.precision != NO_FLAG)
-	{
-		temp = ft_strnew(len < format.precision ? format.precision : len);
-		ft_memcpy(&temp[len < format.precision ? format.precision - len : 0], arg, len);
-		ft_memset(temp, '0', len < format.precision ? format.precision - len : 0);
-		len = format.precision > len ? format.precision : len;
-	}
-	else
-		temp = ft_strdup(arg);
-	differ = format.width > len ? format.width - len : 0;
 	if (!format.flags.minus)
 	{
 		if (!format.flags.zero && format.width > len)
@@ -124,6 +106,40 @@ void		fill_int_format(t_format format, char *arg)
 	else
 		if (prefix)
 			ft_lstaddback(&g_printf.lst_buf, prefix, ft_strlen(prefix) + 1);
+}
+
+char		*add_precision_zeros(t_format format, int *len, char *arg)
+{
+	char	*temp;
+
+	if (format.precision != NO_FLAG)
+	{
+		temp = ft_strnew((*len) < format.precision ? format.precision : (*len));
+		ft_memcpy(&temp[(*len) < format.precision ? format.precision - (*len) : 0], arg, (*len));
+		ft_memset(temp, '0', (*len) < format.precision ? format.precision - (*len) : 0);
+		(*len) = format.precision > (*len) ? format.precision : (*len);
+	}
+	else
+		temp = ft_strdup(arg);
+	return (temp);
+}
+
+void		fill_int_format(t_format format, char *arg)
+{
+	int			len;
+	int			differ;
+	char		*temp;
+	char		*prefix;
+
+	if (format.type != OCTAL && format.type != B_HEX
+			&& format.type != S_HEX && format.type != PTR)
+		prefix = get_prefix(arg, &format);
+	else
+		prefix = get_base_prefix(arg, &format);
+	len = ft_strlen(arg);
+	temp = add_precision_zeros(format, &len, arg);
+	differ = format.width > len ? format.width - len : 0;
+	add_prefix(format, differ, prefix, len);
 	ft_lstaddback(&g_printf.lst_buf, temp, len + 1);
 	if (format.flags.minus)
 		fill_differ(differ, format);

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:43:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 11:31:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:26:37 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		moulitest(void)
 	ft_printf("%O", LONG_MAX);
 	ft_putchar('\n');
 	printf("printf:    %O", LONG_MAX);
-*/
+
 	printf("\n--------------------------------\n");
 	printf("\t\tOctal prec no value and grid:\n\n");
 
@@ -53,12 +53,19 @@ void		moulitest(void)
 	ft_printf("@moulitest: %o %#.0o", 0, 0);
 	ft_putchar('\n');
 	printf("printf:    @moulitest: %o %#.0o", 0, 0);
-
+	*/
 	printf("\n--------------------------------\n");
-	printf("\t\tPTR:\n\n");
+	printf("\t\toctal:\n\n");
 
 	write(1, "ft_printf: ", 11);
-	ft_printf("%.0p, %.p", 0, 0);
+	ft_printf("{%*d}", -5, 42);
 	ft_putchar('\n');
-	printf("printf:    %.0p, %.p", 0, 0);
+	printf("printf:    {%*d}", -5, 42);
+
+	printf("\n--------------------------------\n");
+	printf("\t\tlel?:\n\n");
+	write(1, "ft_printf: ", 11);
+	ft_printf("{%-15u", 4294967295);
+	ft_putchar('\n');
+	printf("printf:    {%-15u", 4294967295);
 }

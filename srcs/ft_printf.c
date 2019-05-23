@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 10:45:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:20:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		add_buf_node(char *part)
 	t_format	format;
 
 	format = get_format(part);
+	//print_format(format);
 	if (format.type_flag == BREAK || format.type == BREAK)
 		add_text(part, format);
 	if (format.type == CHAR)
@@ -92,9 +93,12 @@ int 		ft_printf(const char *format, ...)
 	va_start(g_printf.ap, format);
 	parts = split_flags(format, '%');
 	i = 0;
+	//t_format	temp_f;
 	while (parts[i])
 	{
-		/*if (parts[i][0] == '%' && parts[i + 1] && parts[i + 1] == '%') //todo handle percent specifier
+		/*if (parts[i][0] == '%' && parts[i + 1])
+			temp_f = get_format(parts[i + 1]);
+		if (parts[i][0] == '%' && temp_f.type == PERCENT) //todo handle percent specifier
 		{
 			perc_str = ft_strjoin(parts[i], parts[i + 1]);
 			add_buf_node(perc_str);

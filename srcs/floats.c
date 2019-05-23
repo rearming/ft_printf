@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/23 11:40:54 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:16:11 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,57 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void			get_a(t_ld *ld, int sign,
-								long double num, int precision)
+static int                              is_even(int num)
 {
-	unsigned long		whole;
-	unsigned long		fract;
+	return (num % 2 == 0 ? 1 : 0);
+}
 
-	whole = (unsigned long)num;
-	fract = (unsigned long)(ft_power(10, precision) * (num - whole));
+static char 							*combine_ld(unsigned long fract,
+											unsigned long whole, int sign, int precision)
+{
+	char 					*str;
+	char 					*str_tmp_f;
+	char 					*str_tmp_w;
+	size_t 					len;
+
+	str_tmp_f = ft_ulltoa(fract);
+	str_tmp_w = ft_ulltoa(whole);
+	len = ft_strlen(str_tmp_f) + ft_strlen(str_tmp_w) + (sign == -1 ? 1 : 0);
+	str = ft_strnew(len);
 	if (sign == -1)
-		ld->str = ft_strdup("-");
-	else
-		ld->str = ft_strnew(0);
-	ld->str = ft_strcat(ld->str, ft_ultoa(whole));
+		str[0] = '-';
+	str = ft_strcat(str, str_tmp_w);
 	if (precision != 0)
 	{
-		ld->str = ft_strcat(ld->str, ".");
-		ld->str = ft_strncat(ld->str, ft_ultoa(fract), (size_t)precision);
+		str = ft_strcat(str, ".");
+		str = ft_strncat(str, str_tmp_f, precision);
 	}
+	free(str_tmp_f);
+	free(str_tmp_w);
+	return (str);
+}
+
+static void                             get_a(t_ld *ld, int sign,
+											  long double num, int precision)
+{
+	unsigned long           whole;
+	unsigned long           fract;
+	unsigned long           last;
+	unsigned long			last_two;
+
+	whole = (unsigned long)num;
+	last_two = (unsigned long)(ft_power(10, (precision + 2)) * (num - whole));
+	last = (unsigned long)(ft_power(10, (precision + 1)) * (num - whole));
+	fract = (unsigned long)(ft_power(10, (precision)) * (num - whole));
+	if (last - (fract * 10) > 5)
+		fract++;
+	else if (last - (fract * 10) == 5 && last_two - (last * 10) > 0)
+		fract++;
+	else if (last - (fract * 10) == 5 && last_two - (last * 10) == 0)
+		fract += is_even(fract) ? 0 : 1;
+	else
+		ld->str = NULL; //todo was ft_strnew(0)
+	ld->str = combine_ld(fract, whole, sign, precision);
 }
 
 static t_ld			*parse_ld(long double num, int precision)
@@ -94,7 +127,8 @@ void				fill_float_format(t_format format, char *arg)
 			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
 		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
 	}
-	fill_differ(differ, format);
+	if (format.width != NO_VALUE && format.width != NO_FLAG)
+		fill_differ(differ, format);
 	if (!format.flags.minus)
 	{
 		if (format.flags.plus)
@@ -106,6 +140,7 @@ void				fill_float_format(t_format format, char *arg)
 void				add_double(char *part, t_format format)
 {
 	char	*arg;
+
 
 	format.flags.zero =
 			format.precision != NO_FLAG ? 0 : format.flags.zero;

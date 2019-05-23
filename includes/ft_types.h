@@ -39,8 +39,8 @@
 # define WCHAR 33
 # define WSTRING 34
 
-# define NO_FLAG -1
-# define NO_VALUE -2
+# define NO_FLAG -50
+# define NO_VALUE -51
 # define BREAK -3
 
 #endif
