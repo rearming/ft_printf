@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror -O2
 
-LIBFT_INCL = ../includes
+LIBFT_INCL = ./libft/includes
 
 PRINTF_INCL = ./includes
 
