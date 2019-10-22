@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:17:07 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 12:24:29 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 # include "ft_types.h"
 # include "error.h"
 
-extern t_printf	g_printf;
+extern t_printf	g_pf;
 
 /*
 ** main functions
 */
 
-int 					ft_printf(const char *format, ...);
+int						ft_printf(const char *format, ...);
 void					add_buf_node(char *part);
 void					free_list(t_list **list);
 
@@ -38,7 +38,7 @@ void					free_list(t_list **list);
 ** output functions
 */
 
-char 					*get_buffer(t_list **list, size_t total_len);
+char					*get_buffer(t_list **list, size_t total_len);
 int						print_list(t_list **list, int fd);
 
 /*
@@ -59,9 +59,20 @@ t_format				get_format(char *part);
 void					fill_int_format(t_format format, char *arg);
 void					fill_format(t_format format, char *arg);
 void					fill_float_format(t_format format, char *arg);
-void					fill_differ(int differ, t_format format);
-void					fill_base_format(t_format format, char *arg);
 void					fill_text_format(t_format format, char *arg);
+
+/*
+**	formatting utils
+*/
+
+void					shift_arg(char **arg);
+void					fill_differ(int differ, t_format format);
+char					*get_prefix(char *arg, t_format *format);
+char					*get_base_prefix(char *arg, t_format *format);
+void					add_prefix(t_format format,
+							int differ, char *prefix, int len);
+char					*add_precision_zeros(t_format format,
+							int *len, char *arg);
 
 /*
 ** string functions
@@ -76,7 +87,7 @@ void					add_percent(char *part, t_format format);
 ** int functions
 */
 
-char 					*convert_signed_arg(t_format format);
+char					*convert_signed_arg(t_format format);
 void					add_signed(char *part, t_format format);
 void					add_unsigned(char *part, t_format format);
 void					add_base(char *part, t_format format);
@@ -86,7 +97,7 @@ void					add_base(char *part, t_format format);
 */
 
 void					print_format(t_format format);
-char 					*debug_type(int code);
+char					*debug_type(int code);
 void					my_tests(void);
 void					basic_tests(void);
 void					int_prec_tests(void);

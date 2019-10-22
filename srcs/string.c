@@ -6,17 +6,17 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:20:52 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 12:24:29 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf	g_printf;
+t_printf	g_pf;
 
 void		add_text(char *part, t_format format)
 {
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+	ft_lstaddback(&g_pf.buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
 }
@@ -24,8 +24,8 @@ void		add_text(char *part, t_format format)
 void		add_string(char *part, t_format format)
 {
 	if (format.type == STRING)
-		fill_text_format(format, va_arg(g_printf.ap, char*));
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+		fill_text_format(format, va_arg(g_pf.ap, char*));
+	ft_lstaddback(&g_pf.buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
 }
@@ -36,7 +36,7 @@ void		add_char(char *part, t_format format)
 	int		arg;
 
 	res = ft_strnew(4);
-	arg = va_arg(g_printf.ap, int);
+	arg = va_arg(g_pf.ap, int);
 	if (format.type == CHAR)
 		res[0] = (char)arg;
 	else if (format.type == WCHAR)
@@ -46,10 +46,10 @@ void		add_char(char *part, t_format format)
 		res[2] = ((arg >> 8) & 0xFF);
 		res[3] = arg & 0xFF;
 	}
-	format.precision = 1;
+	format.prec = 1;
 	fill_text_format(format, res);
 	free(res);
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+	ft_lstaddback(&g_pf.buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
 }
@@ -61,10 +61,10 @@ void		add_percent(char *part, t_format format)
 	res = ft_strnew(1);
 	format.type = CHAR;
 	res[0] = '%';
-	format.precision = 1;
+	format.prec = 1;
 	fill_text_format(format, res);
 	free(res);
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
-				  ft_strlen(&part[format.i]) + 1);
+	ft_lstaddback(&g_pf.buf, &part[format.i],
+				ft_strlen(&part[format.i]) + 1);
 	free(part);
 }

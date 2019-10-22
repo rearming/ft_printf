@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/23 13:16:11 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 #include <stdio.h>
 #include <limits.h>
 
-static int                              is_even(int num)
+static char			*combine_ld(unsigned long fract,
+						unsigned long whole, int sign, int precision)
 {
-	return (num % 2 == 0 ? 1 : 0);
-}
-
-static char 							*combine_ld(unsigned long fract,
-											unsigned long whole, int sign, int precision)
-{
-	char 					*str;
-	char 					*str_tmp_f;
-	char 					*str_tmp_w;
-	size_t 					len;
+	char				*str;
+	char				*str_tmp_f;
+	char				*str_tmp_w;
+	size_t				len;
 
 	str_tmp_f = ft_ulltoa(fract);
 	str_tmp_w = ft_ulltoa(whole);
@@ -45,12 +40,12 @@ static char 							*combine_ld(unsigned long fract,
 	return (str);
 }
 
-static void                             get_a(t_ld *ld, int sign,
-											  long double num, int precision)
+static void			get_a(t_ld *ld, int sign,
+							long double num, int precision)
 {
-	unsigned long           whole;
-	unsigned long           fract;
-	unsigned long           last;
+	unsigned long			whole;
+	unsigned long			fract;
+	unsigned long			last;
 	unsigned long			last_two;
 
 	whole = (unsigned long)num;
@@ -64,7 +59,7 @@ static void                             get_a(t_ld *ld, int sign,
 	else if (last - (fract * 10) == 5 && last_two - (last * 10) == 0)
 		fract += is_even(fract) ? 0 : 1;
 	else
-		ld->str = NULL; //todo was ft_strnew(0)
+		ld->str = NULL;
 	ld->str = combine_ld(fract, whole, sign, precision);
 }
 
@@ -105,51 +100,19 @@ static char			*ftoa(long double num, int precision)
 	return (ld->str);
 }
 
-long double			get_doble_arg(t_format format)
-{
-	if (format.type_flag == LDOUBLE)
-		return (va_arg(g_printf.ap, long double));
-	return (va_arg(g_printf.ap, double));
-}
-
-void				fill_float_format(t_format format, char *arg)
-{
-	int			len;
-	int			differ;
-
-	if (!arg)
-		return ;
-	len = ft_strlen(arg);
-	differ = format.width > len ? format.width - len : 0;
-	if (format.flags.minus)
-	{
-		if (format.flags.plus)
-			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
-		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
-	}
-	if (format.width != NO_VALUE && format.width != NO_FLAG)
-		fill_differ(differ, format);
-	if (!format.flags.minus)
-	{
-		if (format.flags.plus)
-			ft_isdigit(arg[0]) ? ft_lstaddback(&g_printf.lst_buf, "+", 2) : 0;
-		ft_lstaddback(&g_printf.lst_buf, arg, len + 1);
-	}
-}
-
 void				add_double(char *part, t_format format)
 {
 	char	*arg;
 
-
 	format.flags.zero =
-			format.precision != NO_FLAG ? 0 : format.flags.zero;
-	arg = ftoa(get_doble_arg(format), format.precision);
-	format.precision = format.precision == NO_FLAG ? 0 : format.precision;
+			format.prec != NO_FLAG ? 0 : format.flags.zero;
+	arg = (ftoa(format.type == LDOUBLE ? va_arg(g_pf.ap, long double)
+			: va_arg(g_pf.ap, double), format.prec));
+	format.prec = format.prec == NO_FLAG ? 0 : format.prec;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_float_format(format, arg);
 	free(arg);
-	ft_lstaddback(&g_printf.lst_buf, &part[format.i],
+	ft_lstaddback(&g_pf.buf, &part[format.i],
 			ft_strlen(&part[format.i]) + 1);
 	free(part);
 }

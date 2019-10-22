@@ -6,13 +6,13 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:28:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 15:24:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf	g_printf;
+t_printf	g_pf;
 
 t_flags		get_flags(char *part, int *i)
 {
@@ -47,7 +47,7 @@ int			get_width(char *part, int *i)
 	if (part[*i] == '*')
 	{
 		(*i)++;
-		return (va_arg(g_printf.ap, int));
+		return (va_arg(g_pf.ap, int));
 	}
 	if (!ft_isdigit(part[*i]))
 		return (NO_VALUE);
@@ -66,7 +66,7 @@ int			get_precision(char *part, int *i)
 	if (part[*i] == '*')
 	{
 		(*i)++;
-		return (va_arg(g_printf.ap, int));
+		return (va_arg(g_pf.ap, int));
 	}
 	res = ft_atoi(&part[*i]);
 	if (ft_isdigit(part[*i]))
@@ -76,9 +76,8 @@ int			get_precision(char *part, int *i)
 
 int			get_type_flag(char *part, int *i)
 {
-	if (part[(*i) + 1] == 'U' || part[(*i)] == 'U')
-		return (LONG);
-	if (part[(*i) + 1] == 'O' || part[(*i)] == 'O')
+	if (part[(*i) + 1] == 'U' || part[(*i)] == 'U'
+		|| part[(*i) + 1] == 'O' || part[(*i)] == 'O')
 		return (LONG);
 	if (part[*i] == 'l')
 	{
@@ -100,15 +99,11 @@ int			get_type_flag(char *part, int *i)
 		return (LONG_LONG);
 	if (part[*i] == 'j')
 		return (INT_MAX);
-	if (get_type(part, *i) != BREAK)
-		return (NO_FLAG);
-	else
-		return (BREAK);
+	return (get_type(part, *i) != BREAK ? NO_FLAG : BREAK);
 }
 
 int			get_type(char *part, int i)
 {
-	//printf("Yolo part get_type: [%c]\n", part[i - 1]);
 	if (part[i] == 'c' || part[i] == 'C')
 		return (CHAR);
 	if (part[i] == 'C')
@@ -119,7 +114,7 @@ int			get_type(char *part, int i)
 		return (PTR);
 	if (part[i] == 'd' || part[i] == 'D' || part[i] == 'i')
 		return (INT);
-	if (part[i] == 'u'|| part[i] == 'U')
+	if (part[i] == 'u' || part[i] == 'U')
 		return (UNSIGNED);
 	if (part[i] == 'o' || part[i] == 'O')
 		return (OCTAL);
@@ -131,40 +126,7 @@ int			get_type(char *part, int i)
 		return (DOUBLE);
 	if (part[i] == 'b')
 		return (BINARY);
-	if (part[i] == 'r')
-		return (NON_PRINT);
 	if (part[i] == '%')
-	{
 		return (PERCENT);
-	}
 	return (part[i] == 'k' ? DATE : BREAK);
-}
-
-t_format	get_format(char *part)
-{
-	t_format	format;
-
-	format.flags = (t_flags){0, 0, 0, 0, 0};
-	format = (t_format){format.flags, 0, 0, 0, 0, 0};
-	if (part[format.i] != '%')
-		return ((t_format)
-				{format.flags, 0, 0, BREAK, BREAK, 0});
-	else
-		format.i++;
-	format.flags = get_flags(part, &format.i);
-	format.width = get_width(part, &format.i);
-	if (format.width < 0 && format.width != NO_FLAG && format.width != NO_VALUE)
-	{
-		format.width *= -1;
-		format.flags.minus = 1;
-	}
-	format.precision = get_precision(part, &format.i);
-	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
-		return (format);
-	if (format.type_flag != NO_FLAG
-		&& part[format.i] != 'U' && part[format.i] != 'O')
-		format.i++;
-	if ((format.type = get_type(part, format.i)) != BREAK)
-		format.i++;
-	return (format);
 }

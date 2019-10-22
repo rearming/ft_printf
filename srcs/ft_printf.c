@@ -6,15 +6,15 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 04:21:34 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 15:20:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf	g_printf;
+t_printf	g_pf;
 
-char 		*get_buffer(t_list **list, size_t total_len)
+char		*get_buffer(t_list **list, size_t total_len)
 {
 	char		*buffer;
 	int			start;
@@ -37,9 +37,9 @@ char 		*get_buffer(t_list **list, size_t total_len)
 
 int			print_list(t_list **list, int fd)
 {
-	size_t 		total_len;
+	size_t		total_len;
 	t_list		*tmp_count;
-	char 		*buffer;
+	char		*buffer;
 
 	if (!list)
 		raise_error(ERR_NULL_LIST);
@@ -50,10 +50,39 @@ int			print_list(t_list **list, int fd)
 		total_len += tmp_count->content_size - 1;
 		tmp_count = tmp_count->next;
 	}
-	buffer = get_buffer(&g_printf.lst_buf, total_len);
+	buffer = get_buffer(&g_pf.buf, total_len);
 	write(fd, buffer, total_len);
 	free(buffer);
 	return (total_len);
+}
+
+t_format	get_format(char *part)
+{
+	t_format	format;
+
+	format.flags = (t_flags){0, 0, 0, 0, 0};
+	format = (t_format){format.flags, 0, 0, 0, 0, 0};
+	if (part[format.i] != '%')
+		return ((t_format)
+				{format.flags, 0, 0, BREAK, BREAK, 0});
+	else
+		format.i++;
+	format.flags = get_flags(part, &format.i);
+	format.width = get_width(part, &format.i);
+	if (format.width < 0 && format.width != NO_FLAG && format.width != NO_VALUE)
+	{
+		format.width *= -1;
+		format.flags.minus = 1;
+	}
+	format.prec = get_precision(part, &format.i);
+	if ((format.type_flag = get_type_flag(part, &format.i)) == BREAK)
+		return (format);
+	if (format.type_flag != NO_FLAG
+		&& part[format.i] != 'U' && part[format.i] != 'O')
+		format.i++;
+	if ((format.type = get_type(part, format.i)) != BREAK)
+		format.i++;
+	return (format);
 }
 
 void		add_buf_node(char *part)
@@ -61,7 +90,6 @@ void		add_buf_node(char *part)
 	t_format	format;
 
 	format = get_format(part);
-	//print_format(format);
 	if (format.type_flag == BREAK || format.type == BREAK)
 		add_text(part, format);
 	if (format.type == CHAR)
@@ -70,7 +98,6 @@ void		add_buf_node(char *part)
 		add_string(part, format);
 	if (format.type == PERCENT)
 		add_percent(part, format);
-
 	if (format.type == INT)
 		add_signed(part, format);
 	if (format.type == UNSIGNED)
@@ -83,35 +110,22 @@ void		add_buf_node(char *part)
 		add_base(part, format);
 }
 
-int 		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	int			i;
-	//char		*perc_str;
-	char 		**parts;
-	int 		ret_val;
+	char		**parts;
+	int			ret_val;
 
-	va_start(g_printf.ap, format);
+	va_start(g_pf.ap, format);
 	parts = split_flags(format, '%');
 	i = 0;
-	//t_format	temp_f;
 	while (parts[i])
 	{
-		/*if (parts[i][0] == '%' && parts[i + 1])
-			temp_f = get_format(parts[i + 1]);
-		if (parts[i][0] == '%' && temp_f.type == PERCENT) //todo handle percent specifier
-		{
-			perc_str = ft_strjoin(parts[i], parts[i + 1]);
-			add_buf_node(perc_str);
-			free(parts[i]);
-			free(parts[i + 1]);
-			i++;
-		}
-		else*/
-			add_buf_node(parts[i]);
+		add_buf_node(parts[i]);
 		i++;
 	}
-	va_end(g_printf.ap);
-	ret_val = print_list(&g_printf.lst_buf, 1);
+	va_end(g_pf.ap);
+	ret_val = print_list(&g_pf.buf, 1);
 	free(parts);
 	return (ret_val);
 }

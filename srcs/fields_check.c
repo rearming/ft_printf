@@ -6,13 +6,11 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 16:34:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/05/20 18:03:48 by sselusa          ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "structs.h"
-#include <stdio.h>
 #include <limits.h>
 
 static void				check_exp_zero(t_ld *ld)

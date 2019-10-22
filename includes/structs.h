@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 11:28:25 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/23 12:24:29 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,30 @@
 
 typedef struct			s_flags
 {
-	char 				zero;
-	char 				space;
-	char 				grid;
-	char 				plus;
-	char 				minus;
+	char				zero;
+	char				space;
+	char				grid;
+	char				plus;
+	char				minus;
 }						t_flags;
 
 typedef struct			s_format
 {
 	t_flags				flags;
-	int 				width;
-	int 				precision;
-	int 				type_flag;
-	int 				type;
-	int 				i;
+	int					width;
+	int					prec;
+	int					type_flag;
+	int					type;
+	int					i;
 }						t_format;
 
 typedef struct			s_printf
 {
-	t_list				*lst_buf;
-	va_list 			ap;
+	t_list				*buf;
+	va_list				ap;
 }						t_printf;
 
-union 					u_ld
+union					u_ld
 {
 	long double			ld_tmp;
 	__int128_t			int_tmp;

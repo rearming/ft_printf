@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 19:54:17 by sleonard          #+#    #+#             */
-/*   Updated: 2019/05/20 20:53:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char		*add_part(const char *str, size_t *start, char delim)
 	str[*start + begin] == delim ? begin++ : begin;
 	while (str[*start + begin + end] && str[*start + begin + end] != delim)
 		end++;
-	if (str[*start + begin + end] == delim && str[*start + begin + end + 1] == 0)
+	if (str[*start + begin + end] == delim
+		&& str[*start + begin + end + 1] == 0)
 		end++;
 	part = ft_strsub(str, *start, end + begin);
 	*start += end + begin;
