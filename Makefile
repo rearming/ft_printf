@@ -27,7 +27,11 @@ SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-all: $(NAME)
+all: update $(NAME)
+
+.PHONY: update
+update:
+	git submodule update
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
