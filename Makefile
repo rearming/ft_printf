@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -O2
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT_INCL = ./libft/includes
 
@@ -11,23 +11,24 @@ DIR_S = ./srcs
 DIR_O = temp
 
 SOURCES =						\
+		ft_printf_family.c		\
 		error.c					\
 		format_filler.c			\
 		format_parser.c			\
 		int.c					\
-		ft_printf.c				\
 		split_flags.c			\
 		string.c				\
 		int.c					\
 		floats.c				\
 		fields_check.c			\
 		format_filler_utils.c	\
+		main_processing.c		\
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-all: update $(NAME)
+all: $(NAME)
 
 .PHONY: update
 update:

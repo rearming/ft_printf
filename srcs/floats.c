@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:20:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void				add_double(char *part, t_format format)
 
 	format.flags.zero =
 			format.prec != NO_FLAG ? 0 : format.flags.zero;
-	arg = (ftoa(format.type == LDOUBLE ? va_arg(g_pf.ap, long double)
-			: va_arg(g_pf.ap, double), format.prec));
+	arg = (ftoa(format.type == LDOUBLE ? va_arg(g_pf.args, long double)
+			: va_arg(g_pf.args, double), format.prec));
 	format.prec = format.prec == NO_FLAG ? 0 : format.prec;
 	ft_isdigit(arg[0]) && format.flags.plus ? format.width -= 1 : format.width;
 	fill_float_format(format, arg);
