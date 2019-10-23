@@ -6,12 +6,12 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 12:26:00 by sselusa           #+#    #+#             */
-/*   Updated: 2019/10/22 19:20:35 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/10/22 21:49:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "structs.h"
+#include "ft_structs.h"
 #include <stdio.h>
 #include <limits.h>
 
