@@ -8,3 +8,4 @@ CMakeLists.txt
 *.a
 *.o
 Makefile
+main.c
