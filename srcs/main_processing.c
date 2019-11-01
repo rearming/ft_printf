@@ -32,6 +32,7 @@ char		*get_buffer(t_list **list, size_t total_len)
 		free(temp->content);
 		free(temp);
 	}
+	buffer[total_len] = '\0';
 	return (buffer);
 }
 
