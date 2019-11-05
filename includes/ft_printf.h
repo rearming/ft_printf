@@ -38,7 +38,6 @@ void					add_buf_node(char *part);
 void					free_list(t_list **list);
 char					*get_formatted_string(int *out_symbols_count,
 							const char *format);
-//char					*get_formatted_string(const char *format, ...);
 
 /*
 ** output functions

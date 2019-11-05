@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#ifndef FT_DEFINES_H
+# define FT_DEFINES_H
 
 # define TRUE 1
 # define FALSE 0
