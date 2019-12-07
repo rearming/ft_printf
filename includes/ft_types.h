@@ -43,4 +43,10 @@
 # define NO_VALUE -51
 # define BREAK -3
 
+# ifdef __linux__
+#  define INTMAX_T __intmax_t
+# else
+#  define INTMAX_T intmax_t
+# endif
+
 #endif

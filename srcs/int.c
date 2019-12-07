@@ -19,7 +19,7 @@ char		*convert_signed_arg(t_format format)
 	if (format.type_flag == CHAR)
 		return (ft_lltoa((char)va_arg(g_pf.args, int)));
 	if (format.type_flag == INT_MAX)
-		return (ft_lltoa(va_arg(g_pf.args, intmax_t)));
+		return (ft_lltoa(va_arg(g_pf.args, INTMAX_T)));
 	if (format.type_flag == SHORT)
 		return (ft_lltoa((short)va_arg(g_pf.args, int)));
 	if (format.type_flag == LONG)
@@ -36,7 +36,7 @@ char		*convert_unsigned_arg(t_format format)
 	if (format.type_flag == NO_FLAG)
 		return (ft_ulltoa(va_arg(g_pf.args, unsigned)));
 	if (format.type_flag == INT_MAX)
-		return (ft_ulltoa(va_arg(g_pf.args, intmax_t)));
+		return (ft_ulltoa(va_arg(g_pf.args, INTMAX_T)));
 	if (format.type_flag == LONG)
 		return (ft_ulltoa(va_arg(g_pf.args, unsigned long)));
 	if (format.type_flag == CHAR)

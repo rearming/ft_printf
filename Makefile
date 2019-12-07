@@ -40,7 +40,7 @@ $(NAME): $(OBJS)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
 	@mkdir -p $(DIR_O)
-	gcc $(FLAGS) -I $(PRINTF_INCL) -I $(LIBFT_INCL) -c $< -o $@
+	clang $(FLAGS) -I $(PRINTF_INCL) -I $(LIBFT_INCL) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS)
